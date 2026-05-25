@@ -6,6 +6,7 @@ import HeroBanner from '@/components/HeroBanner';
 import FlashSalesSection from '@/components/FlashSales/FlashSalesSection';
 import Sidebar from '@/components/sidebar';
 import BrowseByCategory from '@/components/BrowseByCategory';
+import BestSellingProducts from '@/components/BestSellingProducts';
 
 export default function Home() {
   return (
@@ -26,6 +27,8 @@ export default function Home() {
 
         {/* Beautiful Dynamic Categories Section */}
         <BrowseByCategory />
+
+        <BestSellingProducts />
       </div>
     </main>
   );
