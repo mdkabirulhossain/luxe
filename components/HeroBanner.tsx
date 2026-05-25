@@ -50,7 +50,7 @@ const HeroBanner: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 bg-black text-white mt-4 lg:mt-10 ml-0 lg:ml-11 p-6 sm:p-10 lg:p-14 flex flex-col md:flex-row items-center justify-between relative overflow-hidden rounded-md min-h-[320px] md:min-h-[380px] transition-all duration-500 ease-in-out">
+    <div className="flex-1 bg-black text-white mt-4 lg:mt-10 ml-0 lg:ml-11 p-6 sm:p-10 lg:p-14 flex flex-col md:flex-row items-center justify-between relative overflow-hidden rounded-md min-h-80 md:min-h-95 transition-all duration-500 ease-in-out">
       
       {/* Dynamic Text Info */}
       <div className="flex flex-col space-y-3 md:space-y-4 z-10 max-w-sm text-center md:text-left items-center md:items-start w-full transition-opacity duration-300">
@@ -61,20 +61,20 @@ const HeroBanner: React.FC = () => {
           </span>
         </div>
         
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-wider min-h-[72px] md:min-h-0">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight tracking-wider min-h-18 md:min-h-0">
           {currentSlide.title}
         </h1>
         
         <a href={currentSlide.link} className="flex items-center gap-2 pt-1 group font-medium underline underline-offset-8 decoration-1 hover:text-gray-300 text-sm sm:text-base">
           Shop Now
-          <svg className="w-4 h-4 sm:w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>
         </a>
       </div>
 
       {/* Dynamic Image Container */}
-      <div className="mt-6 md:mt-0 w-full max-w-[200px] sm:max-w-[240px] md:max-w-xs flex justify-center h-[180px] sm:h-[220px] md:h-[280px]">
+      <div className="mt-6 md:mt-0 w-full max-w-50 sm:max-w-60 md:max-w-xs flex justify-center h-45 sm:h-55 md:h-70">
         <img 
           key={currentIndex} // Adding a key forces a beautiful fade re-render when image URL updates
           src={currentSlide.imageUrl} 
