@@ -8,6 +8,7 @@ import Sidebar from '@/components/sidebar';
 import BrowseByCategory from '@/components/BrowseByCategory';
 import BestSellingProducts from '@/components/BestSellingProducts';
 import ExploreOurProducts from '@/components/ExploreOurProducts';
+import NewArrival from '@/components/NewArrival';
 
 export default function Home() {
   return (
@@ -32,6 +33,8 @@ export default function Home() {
         <BestSellingProducts />
 
         <ExploreOurProducts />
+
+        <NewArrival />
       </div>
     </main>
   );

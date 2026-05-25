@@ -35,7 +35,7 @@ const bestSellingData: Product[] = [
     reviewsCount: 65,
   },
  {
-    id: 'b3',
+    id: 'b4',
     title: 'RGB liquid CPU Cooler',
     image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=400&q=80',
     discount: 10,
