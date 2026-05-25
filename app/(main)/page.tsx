@@ -7,6 +7,7 @@ import FlashSalesSection from '@/components/FlashSales/FlashSalesSection';
 import Sidebar from '@/components/sidebar';
 import BrowseByCategory from '@/components/BrowseByCategory';
 import BestSellingProducts from '@/components/BestSellingProducts';
+import ExploreOurProducts from '@/components/ExploreOurProducts';
 
 export default function Home() {
   return (
@@ -29,6 +30,8 @@ export default function Home() {
         <BrowseByCategory />
 
         <BestSellingProducts />
+
+        <ExploreOurProducts />
       </div>
     </main>
   );
