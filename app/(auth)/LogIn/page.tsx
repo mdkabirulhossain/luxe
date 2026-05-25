@@ -24,10 +24,10 @@ const LogInPage: React.FC = () => {
 
   return (
     <main className="w-full min-h-screen bg-white text-black font-sans flex items-center justify-center p-4 md:p-0 select-none">
-      <div className="max-w-[1100px] w-full flex flex-col md:flex-row items-stretch bg-white border border-gray-100 shadow-xl rounded-md overflow-hidden">
+      <div className="max-w-275 w-full flex flex-col md:flex-row items-stretch bg-white border border-gray-100 shadow-xl rounded-md overflow-hidden">
         
         {/* LEFT COLUMN: Premium Side Illustration Frame */}
-        <div className="flex-1 min-w-[300px] md:min-w-[450px] bg-[#C5E8E8] relative flex items-center justify-center h-[300px] md:h-auto">
+        <div className="flex-1 min-w-75 md:min-w-112.5 bg-[#C5E8E8] relative flex items-center justify-center h-75 md:h-auto">
           <div className="relative w-[90%] md:w-[95%] h-[90%] md:h-[95%]">
             <Image 
               src="https://images.unsplash.com/photo-1610438235354-a6fa55280b5c?auto=format&fit=crop&w=600&q=80" 
