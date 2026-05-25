@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import HeroBanner from '@/components/HeroBanner';
 import FlashSalesSection from '@/components/FlashSales/FlashSalesSection';
 import Sidebar from '@/components/sidebar';
+import BrowseByCategory from '@/components/BrowseByCategory';
 
 export default function Home() {
   return (
@@ -22,6 +23,9 @@ export default function Home() {
         
         {/* Today's Flash Deals Dynamic Section */}
         <FlashSalesSection />
+
+        {/* Beautiful Dynamic Categories Section */}
+        <BrowseByCategory />
       </div>
     </main>
   );
