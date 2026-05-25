@@ -268,11 +268,23 @@ const Header: React.FC = () => {
           </button>
           
           {/* Wishlist Button */}
-          <button className="text-black hover:text-gray-600 p-1.5 transition-colors relative" aria-label="View Wishlist">
+          {/* <button className="text-black hover:text-gray-600 p-1.5 transition-colors relative" aria-label="View Wishlist">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
-          </button>
+          </button> */}
+          {/* Wishlist Link Button */}
+        <Link 
+           href="/wishlist" 
+           className="text-black hover:text-gray-600 p-1.5 transition-colors relative block w-fit" 
+           aria-label="View Wishlist"
+        >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+            {/* Red active status indicator badge dot */}
+           <span className="absolute top-1 right-1 bg-red-500 w-2 h-2 rounded-full" />
+       </Link>
           
           {/* Shopping Cart Button */}
           <button className="text-black hover:text-gray-600 p-1.5 transition-colors relative" aria-label="View Basket Cart">
@@ -306,7 +318,7 @@ const Header: React.FC = () => {
 
             {/* Dropdown Menu Overlay matching the requested image layout */}
             {isUserMenuOpen && (
-              <div className="absolute right-0 mt-3 w-56 rounded-md shadow-2xl bg-linear-to-br from-neutral-800 via-neutral-900 to-stone-950 backdrop-blur-md border border-neutral-700/30 py-3 z-[60] transition-all duration-200">
+              <div className="absolute right-0 mt-3 w-56 rounded-md shadow-2xl bg-linear-to-br from-neutral-800 via-neutral-900 to-stone-950 backdrop-blur-md border border-neutral-700/30 py-3 z-60 transition-all duration-200">
                 <div className="flex flex-col space-y-0.5 text-white text-sm">
                   
                   <Link href="/account" className="flex items-center gap-3 px-4 py-2.5 hover:bg-white/10 transition-colors" onClick={() => setIsUserMenuOpen(false)}>
