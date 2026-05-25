@@ -229,8 +229,8 @@ const Header: React.FC = () => {
         {/* Center Section: Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-8 lg:gap-12 text-base font-medium text-black">
           <Link href="/" className="underline underline-offset-8 decoration-2 decoration-black transition-all">Home</Link>
-          <Link href="#" className="hover:underline underline-offset-8 decoration-1 transition-all">Contact</Link>
-          <Link href="#" className="hover:underline underline-offset-8 decoration-1 transition-all">About</Link>
+          <Link href="/contact" className="hover:underline underline-offset-8 decoration-1 transition-all">Contact</Link>
+          <Link href="/about" className="hover:underline underline-offset-8 decoration-1 transition-all">About</Link>
           <Link href="/SignUp" className="hover:underline underline-offset-8 decoration-1 transition-all">Sign Up</Link>
         </nav>
 
@@ -407,8 +407,8 @@ const Header: React.FC = () => {
             {/* Nav Menu Navigation Links */}
             <nav className="flex flex-col space-y-4 text-base font-semibold text-black">
               <Link href="/" className="pb-2 border-b border-gray-100 text-red-500" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
-              <Link href="#" className="pb-2 border-b border-gray-100 hover:text-red-500" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
-              <Link href="#" className="pb-2 border-b border-gray-100 hover:text-red-500" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
+              <Link href="/contact" className="pb-2 border-b border-gray-100 hover:text-red-500" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
+              <Link href="/about" className="pb-2 border-b border-gray-100 hover:text-red-500" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
               <Link href="/SignUp" className="pb-1 hover:text-red-500" onClick={() => setIsMobileMenuOpen(false)}>Sign Up</Link>
             </nav>
           </div>
