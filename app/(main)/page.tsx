@@ -13,8 +13,8 @@ export default function Home() {
       <TopHeader />
       <Header />
       
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        {/* Hero Banner Grid Section */}
+      <div className="max-w-7xl mx-auto px-4 md:px-8 pb-12">
+        {/* Responsive Grid Setup: stacks as columns natively, switches to row on large displays */}
         <div className="flex flex-col lg:flex-row items-stretch">
           <Sidebar />
           <HeroBanner />
