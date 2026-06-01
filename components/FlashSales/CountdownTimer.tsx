@@ -1,5 +1,6 @@
-"use client";
+
 // components/FlashSales/CountdownTimer.tsx
+"use client";
 import React, { useState, useEffect } from 'react';
 
 interface TimeLeft {

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // components/FlashSales/ProductCard.tsx
 import React from 'react';
 
@@ -31,9 +32,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div className="group relative flex flex-col w-full min-w-[270px] max-w-[270px]">
+    <div className="group relative flex flex-col w-full min-w-67.5 max-w-67.5">
       {/* Top Banner (Image & Actions) */}
-      <div className="relative w-full h-[250px] bg-gray-100 flex items-center justify-center rounded-sm overflow-hidden">
+      <div className="relative w-full h-62.5 bg-gray-100 flex items-center justify-center rounded-sm overflow-hidden">
         {/* Discount Tag */}
         <span className="absolute top-3 left-3 bg-red-500 text-white text-xs px-3 py-1 rounded-sm font-medium">
           -{product.discount}%
@@ -55,7 +56,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         {/* Main Product Image */}
-        <img src={product.image} alt={product.title} className="object-contain max-h-[180px] w-auto mix-blend-multiply" />
+        <img src={product.image} alt={product.title} className="object-contain max-h-45 w-auto mix-blend-multiply" />
 
         {/* Dynamic Add to Cart overlay bar */}
         <button className="absolute bottom-0 left-0 w-full bg-black text-white py-2.5 text-center text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
