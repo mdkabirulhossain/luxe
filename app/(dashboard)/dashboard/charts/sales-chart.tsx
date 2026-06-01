@@ -45,7 +45,7 @@ export function SalesChart() {
         <YAxis hide />
         
         {/* Optional accessible accessible tooltip injection matching shadcn styles */}
-        <ChartTooltip cursor={false} className="hidden" />
+        <ChartTooltip cursor={false} />
         
         {/* Main Area curve configuration matching layout properties */}
         <Area
