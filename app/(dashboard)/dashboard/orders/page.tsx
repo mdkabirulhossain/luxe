@@ -4,7 +4,7 @@ import React from "react";
 import { Filter, Plus, TrendingUp, AlertCircle, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button"; // shadcn Button
 import { MetricCard } from "@/components/dashboard/orders/metric-card";
-import { OrderTable } from "@/components/dashboard/orders/order-table";
+import { OrderItem, OrderTable } from "@/components/dashboard/orders/order-table";
 
 // Import your reusable custom components 
 
