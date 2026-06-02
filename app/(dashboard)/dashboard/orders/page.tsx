@@ -1,95 +1,93 @@
+"use client";
+
 import React from "react";
-import { ShoppingCart, Clock, Package, CreditCard, TrendingUp } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Filter, Plus, TrendingUp, AlertCircle, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button"; // shadcn Button
+import { MetricCard } from "@/components/dashboard/orders/metric-card";
+import { OrderTable } from "@/components/dashboard/orders/order-table";
+
+// Import your reusable custom components 
+
+
+const MOCK_DATA: OrderItem[] = [
+  { id: "#ORD-8291", customer: { name: "Sarah Connor", initials: "SC" }, date: "Oct 24, 2023", amount: 2450.00, status: "DELIVERED" },
+  { id: "#ORD-8290", customer: { name: "Marcus Aurelius", initials: "MA" }, date: "Oct 24, 2023", amount: 189.50, status: "PROCESSING" },
+  { id: "#ORD-8289", customer: { name: "Ellen Ripley", initials: "EL" }, date: "Oct 23, 2023", amount: 5200.00, status: "SHIPPED" },
+  { id: "#ORD-8288", customer: { name: "Thomas Ken", initials: "TK" }, date: "Oct 23, 2023", amount: 0.00, status: "CANCELLED" },
+  { id: "#ORD-8287", customer: { name: "John Doe", initials: "JD" }, date: "Oct 22, 2023", amount: 1120.45, status: "PROCESSING" }
+];
 
 export default function OrdersPage() {
-  const orderStats = [
-    { label: "Total Orders", value: "1,284", icon: ShoppingCart, color: "bg-indigo-50 text-indigo-600" },
-    { label: "Pending", value: "42", icon: Clock, color: "bg-amber-50 text-amber-600" },
-    { label: "Shipped", value: "189", icon: Package, color: "bg-blue-50 text-blue-600" },
-    { label: "Revenue", value: "$48,290", icon: CreditCard, color: "bg-emerald-50 text-emerald-600" },
-  ];
-
-  const recentOrders = [
-    { id: "#ORD-7291", customer: "Sarah Mitchell", date: "Jun 1, 2026", amount: "$245.00", status: "Delivered", statusColor: "bg-emerald-50 text-emerald-700" },
-    { id: "#ORD-7290", customer: "James Cooper", date: "Jun 1, 2026", amount: "$189.50", status: "Shipped", statusColor: "bg-blue-50 text-blue-700" },
-    { id: "#ORD-7289", customer: "Emma Watson", date: "May 31, 2026", amount: "$532.00", status: "Processing", statusColor: "bg-amber-50 text-amber-700" },
-    { id: "#ORD-7288", customer: "David Kim", date: "May 31, 2026", amount: "$78.90", status: "Delivered", statusColor: "bg-emerald-50 text-emerald-700" },
-    { id: "#ORD-7287", customer: "Olivia Brown", date: "May 30, 2026", amount: "$1,200.00", status: "Pending", statusColor: "bg-slate-100 text-slate-700" },
-    { id: "#ORD-7286", customer: "Michael Lee", date: "May 30, 2026", amount: "$340.75", status: "Shipped", statusColor: "bg-blue-50 text-blue-700" },
-  ];
+  const handleQuickView = (id: string) => {
+    console.log("Opening detail panel for order: ", id);
+  };
 
   return (
-    <div className="space-y-8">
-      {/* Page Header */}
-      <div>
-        <h2 className="text-3xl font-bold tracking-tight text-slate-900">Orders</h2>
-        <p className="text-sm text-slate-500 mt-1">Track and manage all customer orders.</p>
+    <div className="space-y-6">
+      
+      {/* 1. Page Section Action Title Header Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 className="text-xl font-bold text-slate-900 tracking-tight">Order Management</h2>
+          <p className="text-xs text-slate-400 font-medium mt-0.5">
+            Monitor and fulfill customer requests across all channels.
+          </p>
+        </div>
+        <div className="flex items-center gap-2.5">
+          <Button variant="outline" size="sm" className="font-bold text-xs gap-2">
+            <Filter className="h-3.5 w-3.5 text-slate-500" />
+            Filter
+          </Button>
+          <Button size="sm" className="bg-black text-white hover:bg-zinc-800 font-bold text-xs gap-1.5">
+            <Plus className="h-3.5 w-3.5" />
+            Create Order
+          </Button>
+        </div>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {orderStats.map((stat) => {
-          const Icon = stat.icon;
-          return (
-            <Card key={stat.label} className="border border-slate-200/80 shadow-none rounded-xl">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4">
-                  <div className={`p-3 rounded-lg ${stat.color}`}>
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-slate-400 tracking-wider">{stat.label}</p>
-                    <p className="text-2xl font-bold text-slate-900 tracking-tight">{stat.value}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
+      {/* 2. Top Summary KPI Stats Matrix Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <MetricCard
+          title="Total Orders" 
+          value="1,284" 
+          footer={
+            <span className="flex items-center text-emerald-600 font-bold gap-1 text-[11px]">
+              <TrendingUp className="h-3 w-3" /> +12.5% <span className="text-slate-400 font-semibold">vs LW</span>
+            </span>
+          } 
+        />
+        <MetricCard 
+          title="Pending" 
+          value="42" 
+          footer={
+            <span className="flex items-center text-amber-500 font-bold gap-1 text-[11px]">
+              <AlertCircle className="h-3 w-3" /> Requiring action
+            </span>
+          } 
+        />
+        <MetricCard 
+          title="Shipped Today" 
+          value="156" 
+          footer={
+            <span className="flex items-center text-slate-400 font-semibold gap-1 text-[11px]">
+              <Clock className="h-3 w-3" /> Last sync 5m ago
+            </span>
+          } 
+        />
+        <MetricCard 
+          title="Revenue (24H)" 
+          value="$14,290.00" 
+          footer={
+            <span className="flex items-center text-emerald-600 font-bold gap-1 text-[11px]">
+              <TrendingUp className="h-3 w-3" /> +8.2%
+            </span>
+          } 
+        />
       </div>
 
-      {/* Recent Orders Table */}
-      <Card className="border border-slate-200/80 shadow-none rounded-xl">
-        <CardHeader className="flex flex-row items-center justify-between p-6 border-b border-slate-100">
-          <CardTitle className="text-base font-bold text-slate-900">Recent Orders</CardTitle>
-          <div className="flex items-center gap-1 text-xs font-semibold">
-            <TrendingUp className="h-3.5 w-3.5 text-emerald-600" />
-            <span className="text-emerald-600">+12.5%</span>
-            <span className="text-slate-400 ml-1">vs last month</span>
-          </div>
-        </CardHeader>
-        <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-slate-100">
-                  <th className="text-left px-6 py-3 text-xs font-bold text-slate-400 tracking-wider">ORDER ID</th>
-                  <th className="text-left px-6 py-3 text-xs font-bold text-slate-400 tracking-wider">CUSTOMER</th>
-                  <th className="text-left px-6 py-3 text-xs font-bold text-slate-400 tracking-wider">DATE</th>
-                  <th className="text-left px-6 py-3 text-xs font-bold text-slate-400 tracking-wider">AMOUNT</th>
-                  <th className="text-left px-6 py-3 text-xs font-bold text-slate-400 tracking-wider">STATUS</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentOrders.map((order) => (
-                  <tr key={order.id} className="border-b border-slate-50 hover:bg-slate-50/50 transition-colors">
-                    <td className="px-6 py-4 font-semibold text-slate-900">{order.id}</td>
-                    <td className="px-6 py-4 text-slate-600">{order.customer}</td>
-                    <td className="px-6 py-4 text-slate-500">{order.date}</td>
-                    <td className="px-6 py-4 font-semibold text-slate-900">{order.amount}</td>
-                    <td className="px-6 py-4">
-                      <span className={`text-xs font-semibold px-2.5 py-1 rounded-md ${order.statusColor}`}>
-                        {order.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </CardContent>
-      </Card>
+      {/* 3. Reusable Isolated Table View Layout Component */}
+      <OrderTable orders={MOCK_DATA} onQuickView={handleQuickView} />
+      
     </div>
   );
 }
