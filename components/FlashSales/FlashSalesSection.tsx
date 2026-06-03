@@ -3,10 +3,10 @@
 
 import React, { useRef } from 'react';
 import CountdownTimer from './CountdownTimer';
-import ProductCard, { Product } from './ProductCard';
+import ProductCard, { ProductCardData } from '@/components/ProductCard';
 
 // Mock Data matching dynamic image configurations
-const mockProducts: Product[] = [
+const mockProducts: ProductCardData[] = [
   { id: '1', title: 'HAVIT HV-G92 Gamepad', image: 'https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=400&q=80', discount: 40, currentPrice: 120, originalPrice: 160, rating: 5, reviewsCount: 88 },
   { id: '2', title: 'AK-900 Wired Keyboard', image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=400&q=80', discount: 35, currentPrice: 960, originalPrice: 1160, rating: 4, reviewsCount: 75 },
   { id: '3', title: 'IPS LCD Gaming Monitor', image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=400&q=80', discount: 30, currentPrice: 370, originalPrice: 400, rating: 5, reviewsCount: 99 },
@@ -92,7 +92,7 @@ const FlashSalesSection: React.FC = () => {
         {mockProducts.map((prod) => (
           // snap-start aligns each item exactly to the left edge when shifting focus
           <div className="snap-start shrink-0 w-67.5" key={prod.id}>
-            <ProductCard product={prod} />
+            <ProductCard product={prod} variant="flash-sales" />
           </div>
         ))}
       </div>

@@ -1,9 +1,9 @@
 // components/BestSellingProducts.tsx
 import React from 'react';
-import ProductCard, { Product } from './FlashSales/ProductCard';
+import ProductCard, { ProductCardData } from '@/components/ProductCard';
 
 // Dummy placeholder datasets matching your exact upload criteria
-const bestSellingData: Product[] = [
+const bestSellingData: ProductCardData[] = [
   {
     id: 'b1',
     title: 'The north coat',
@@ -71,7 +71,7 @@ const BestSellingProducts: React.FC = () => {
       <div className="flex gap-7 overflow-x-auto pb-4 scrollbar-none md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible md:pb-0">
         {bestSellingData.map((product) => (
           <div key={product.id} className="shrink-0 md:shrink md:w-full">
-            <ProductCard product={product} />
+            <ProductCard product={product} variant="best-selling" />
           </div>
         ))}
       </div>
