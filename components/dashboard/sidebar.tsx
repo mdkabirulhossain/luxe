@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { 
   LayoutDashboard, 
   ShoppingBag, 
+  Sliders,
   ShoppingCart, 
   BarChart3, 
   Layers, 
@@ -17,6 +18,7 @@ import {
 const navItems = [
   { name: "Dashboard", href: "/dashboard/overview", icon: LayoutDashboard },
   { name: "Products", href: "/dashboard/products", icon: ShoppingBag },
+  { name: "Hero Slider", href: "/dashboard/heroSlider", icon: Sliders },
   { name: "Orders", href: "/dashboard/orders", icon: ShoppingCart },
   { name: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
   { name: "Inventory", href: "/dashboard/inventory", icon: Layers },
