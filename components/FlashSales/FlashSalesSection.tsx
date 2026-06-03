@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useRef } from 'react';
+import Link from 'next/link';
 import CountdownTimer from './CountdownTimer';
 import ProductCard, { ProductCardData } from '@/components/ProductCard';
 
@@ -99,9 +100,9 @@ const FlashSalesSection: React.FC = () => {
 
       {/* Center structured Action Button view */}
       <div className="w-full flex justify-center mt-14">
-        <button className="bg-red-500 hover:bg-red-600 text-white px-12 py-4 rounded-sm text-base font-medium transition-colors">
+        <Link href="/products" className="bg-red-500 hover:bg-red-600 text-white px-12 py-4 rounded-sm text-base font-medium transition-colors inline-block text-center select-none cursor-pointer">
           View All Products
-        </button>
+        </Link>
       </div>
     </section>
   );

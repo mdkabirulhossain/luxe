@@ -3,6 +3,7 @@
 "use client";
 
 import React, { useRef, useState } from 'react';
+import Link from 'next/link';
 import ProductCard, { ProductCardData } from '@/components/ProductCard';
 
 const exploreProductsData: ProductCardData[] = [
@@ -91,9 +92,9 @@ const ExploreOurProducts: React.FC = () => {
 
       {/* Under-Grid Center View Actions Button */}
       <div className="w-full flex justify-center mt-16">
-        <button className="bg-red-500 hover:bg-red-600 text-white px-10 py-4 rounded-sm text-base font-medium transition-colors">
+        <Link href="/products" className="bg-red-500 hover:bg-red-600 text-white px-10 py-4 rounded-sm text-base font-medium transition-colors inline-block text-center select-none cursor-pointer">
           View All Products
-        </button>
+        </Link>
       </div>
     </section>
   );

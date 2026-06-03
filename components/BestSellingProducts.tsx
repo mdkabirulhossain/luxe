@@ -1,5 +1,6 @@
 // components/BestSellingProducts.tsx
 import React from 'react';
+import Link from 'next/link';
 import ProductCard, { ProductCardData } from '@/components/ProductCard';
 
 // Dummy placeholder datasets matching your exact upload criteria
@@ -62,9 +63,9 @@ const BestSellingProducts: React.FC = () => {
           Best Selling Products
         </h2>
 
-        <button className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-sm text-sm font-medium transition-colors whitespace-nowrap">
+        <Link href="/products" className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-sm text-sm font-medium transition-colors whitespace-nowrap inline-block text-center select-none cursor-pointer">
           View All
-        </button>
+        </Link>
       </div>
 
       {/* Grid Container Setup: Responsive fallback flex swiper on tiny mobile screens */}
