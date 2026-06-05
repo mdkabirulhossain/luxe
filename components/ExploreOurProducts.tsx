@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 // components/ExploreOurProducts.tsx
 "use client";
 
