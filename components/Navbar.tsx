@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 
 const AUTH_KEY = 'luxe_isLoggedIn';
 
-const Header: React.FC = () => {
+const Navbar: React.FC = () => {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchVisibleOnMobile, setIsSearchVisibleOnMobile] = useState(false);
@@ -296,4 +296,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default Navbar;

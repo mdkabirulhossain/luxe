@@ -1,7 +1,7 @@
 // app/(main)/layout.tsx
 import React from 'react';
 import TopHeader from '@/components/TopHeader';
-import Header from '@/components/Header';
+import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata = {
@@ -18,7 +18,7 @@ export default function MainLayout({
     <div className="w-full min-h-screen flex flex-col bg-white text-black antialiased">
       {/* Persists on every nested page inside the (main) group */}
       <TopHeader />
-      <Header />
+      <Navbar />
       
       {/* Main page view layer area */}
       <div className="grow">

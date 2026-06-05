@@ -179,7 +179,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
                 {/* Vertical Dropdown Overlay Panel (Floats right underneath this specific item) */}
                 {cat.subOptions && isExpanded && (
-                  <ul className="absolute left-0 top-full mt-1 w-full min-w-[200px] bg-white border border-gray-100 shadow-xl rounded-md py-2.5 px-3 space-y-2 z-50">
+                  <ul className="absolute left-0 top-full mt-1 w-full min-w-50 bg-white border border-gray-100 shadow-xl rounded-md py-2.5 px-3 space-y-2 z-50">
                     {cat.subOptions.map((sub) => {
                       const isSubActive = activeCategory === cat.name && activeSubcategory === sub;
                       return (
