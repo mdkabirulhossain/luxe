@@ -1,7 +1,7 @@
 // components/BestSellingProducts.tsx
 import React from 'react';
 import Link from 'next/link';
-import ProductCard, { ProductCardData } from '@/components/ProductCard';
+import ProductCard, { ProductCardData } from '@/components/shared/product/ProductCard';
 
 // Dummy placeholder datasets matching your exact upload criteria
 const bestSellingData: ProductCardData[] = [

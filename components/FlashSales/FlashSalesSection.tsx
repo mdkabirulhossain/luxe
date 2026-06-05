@@ -4,7 +4,7 @@
 import React, { useRef } from 'react';
 import Link from 'next/link';
 import CountdownTimer from './CountdownTimer';
-import ProductCard, { ProductCardData } from '@/components/ProductCard';
+import ProductCard, { ProductCardData } from '@/components/shared/product/ProductCard';
 
 // Mock Data matching dynamic image configurations
 const mockProducts: ProductCardData[] = [

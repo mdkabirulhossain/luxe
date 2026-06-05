@@ -2,7 +2,7 @@
 "use client";
 
 import React from 'react';
-import ProductCard, { ProductCardData } from '@/components/ProductCard';
+import ProductCard, { ProductCardData } from '@/components/shared/product/ProductCard';
 
 const WishlistPage: React.FC = () => {
   const wishlistProducts: ProductCardData[] = [

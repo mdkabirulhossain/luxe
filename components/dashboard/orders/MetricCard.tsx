@@ -11,7 +11,7 @@ export const MetricCard = React.forwardRef<HTMLDivElement, MetricCardProps>(
     return (
       <div
         ref={ref}
-        className={`bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-between min-h-[125px] ${className}`}
+        className={`bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-between min-h-31.25 ${className}`}
         {...props}
       >
         <div>

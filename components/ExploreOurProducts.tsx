@@ -3,7 +3,7 @@
 
 import React, { useRef, useState } from 'react';
 import Link from 'next/link';
-import ProductCard, { ProductCardData } from '@/components/ProductCard';
+import ProductCard, { ProductCardData } from '@/components/shared/product/ProductCard';
 
 const exploreProductsData: ProductCardData[] = [
   { id: 'ep1', title: 'Breed Dry Dog Food', image: 'https://images.unsplash.com/photo-1589924691995-400dc9ecc109?auto=format&fit=crop&w=400&q=80', currentPrice: 100, rating: 3, reviewsCount: 35 },

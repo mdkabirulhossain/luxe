@@ -3,7 +3,7 @@
 
 import React, { useState, useMemo, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import ProductCard, { ProductCardData } from "@/components/ProductCard";
+import ProductCard, { ProductCardData } from "@/components/shared/product/ProductCard";
 import Sidebar from "@/components/sidebar";
 import { dummyProducts } from "@/lib/products";
 
