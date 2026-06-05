@@ -12,12 +12,14 @@ import {
   Layers, 
   Settings, 
   ChevronLeft, 
-  LogOut 
+  LogOut,
+  FolderTree
 } from "lucide-react";
 
 const navItems = [
   { name: "Dashboard", href: "/dashboard/overview", icon: LayoutDashboard },
   { name: "Products", href: "/dashboard/products", icon: ShoppingBag },
+  { name: "Categories", href: "/dashboard/categories", icon: FolderTree },
   { name: "Hero Slider", href: "/dashboard/heroSlider", icon: Sliders },
   { name: "Orders", href: "/dashboard/orders", icon: ShoppingCart },
   { name: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
