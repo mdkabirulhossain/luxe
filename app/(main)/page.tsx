@@ -14,7 +14,7 @@ export default function Home() {
     <main className="w-full">
       <div className="max-w-7xl mx-auto px-4 md:px-8 pb-12">
         {/* Responsive Grid Setup */}
-        <div className="flex flex-col lg:flex-row items-start">
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-start w-full">
           <Sidebar />
           <HeroBanner />
         </div>

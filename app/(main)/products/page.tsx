@@ -162,10 +162,10 @@ function AllProductsPageInner() {
         </nav>
 
         {/* Two Column Layout: Sidebar Left, Products Grid Right */}
-        <div className="flex flex-col lg:flex-row gap-10 items-start">
+        <div className="flex flex-col lg:flex-row gap-10 items-stretch lg:items-start w-full">
           
           {/* Left sidebar container */}
-          <div className="lg:w-64 shrink-0">
+          <div className="w-full lg:w-64 shrink-0">
             {/* Left Navbar / Categories Sidebar */}
             <div className="bg-white lg:sticky lg:top-8">
               <h2 className="text-lg font-bold text-black border-b border-gray-100 pb-4 mb-4 hidden lg:block uppercase tracking-wider">
@@ -189,7 +189,7 @@ function AllProductsPageInner() {
           </div>
 
           {/* Right products view area */}
-          <div className="flex-1 flex flex-col space-y-6">
+          <div className="w-full lg:flex-1 flex flex-col space-y-6">
             
             {/* Header: Title, Search, and Sorting */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gray-100 pb-6">

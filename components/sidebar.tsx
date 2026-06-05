@@ -86,7 +86,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <div className="w-full lg:w-64 lg:border-r lg:border-gray-200 lg:pt-10 lg:pr-8 shrink-0 flex flex-col">
       {/* ── MOBILE & TABLET CATEGORIES: Horizontal scroll chips ── */}
-      <div className="w-full lg:hidden py-4 border-b border-gray-100 bg-white sticky top-0 z-20 overflow-visible">
+      <div className="w-full lg:hidden py-4 border-b border-gray-100 bg-white sticky top-20 z-20 overflow-visible">
         <div className="flex gap-3 overflow-x-auto scrollbar-none px-1 whitespace-nowrap pb-1">
           {sidebarCategories.map((cat, idx) => {
             const isActive = activeCategory === cat.name;
@@ -113,13 +113,13 @@ const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Mobile secondary subcategory row */}
         {mobileSubOptions && mobileSubOptions.length > 0 && (
-          <div className="flex gap-2 overflow-x-auto scrollbar-none px-1 py-2 mt-2 bg-gray-50 rounded-md">
+          <div className="flex gap-2 overflow-x-auto scrollbar-none px-1 py-2 mt-2 whitespace-nowrap">
             <button
               onClick={() => handleSelect(activeCategory)}
-              className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors cursor-pointer border ${
+              className={`text-xs px-3.5 py-1.5 rounded-full font-medium transition-colors cursor-pointer ${
                 activeSubcategory === ""
-                  ? "bg-black text-white border-black"
-                  : "bg-white text-gray-600 border-gray-200"
+                  ? "bg-black text-white"
+                  : "bg-gray-100 hover:bg-gray-200 text-black"
               }`}
             >
               All {activeCategory}
@@ -130,10 +130,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                 <button
                   key={sub}
                   onClick={() => handleSelect(activeCategory, sub)}
-                  className={`text-xs px-3 py-1.5 rounded-full font-medium transition-colors cursor-pointer border ${
+                  className={`text-xs px-3.5 py-1.5 rounded-full font-medium transition-colors cursor-pointer ${
                     isSubActive
-                      ? "bg-black text-white border-black"
-                      : "bg-white text-gray-600 border-gray-200 hover:border-gray-400"
+                      ? "bg-black text-white"
+                      : "bg-gray-100 hover:bg-gray-200 text-black"
                   }`}
                 >
                   {sub}
