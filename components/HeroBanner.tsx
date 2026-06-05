@@ -70,7 +70,7 @@ const HeroBanner: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 bg-neutral-950 text-white mt-4 lg:mt-10 ml-0 lg:ml-11 relative overflow-hidden rounded-sm aspect-[892/380] min-h-[340px] sm:min-h-[380px] select-none shadow-sm">
+    <div className="flex-1 bg-neutral-950 text-white mt-4 lg:mt-10 ml-0 lg:ml-11 relative overflow-hidden rounded-sm aspect-892/380 min-h-85 sm:min-h-95 select-none shadow-sm">
 
       {/* ── Slides Viewport Track ── */}
       {MOCK_SLIDES.map((slide, idx) => {
@@ -90,10 +90,10 @@ const HeroBanner: React.FC = () => {
                 fill
                 priority={idx === 0}
                 sizes="(max-width: 1200px) 100vw, 1200px"
-                className={`object-cover transition-transform duration-[6000ms] ease-out ${isSelected ? "scale-105" : "scale-100"
+                className={`object-cover transition-transform duration-6000 ease-out ${isSelected ? "scale-105" : "scale-100"
                   }`}
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent md:via-black/40" />
+              <div className="absolute inset-0 bg-linear-to-r from-black/90 via-black/50 to-transparent md:via-black/40" />
             </div>
 
             {/* Elegant Minimalist Content Box */}
@@ -114,7 +114,7 @@ const HeroBanner: React.FC = () => {
 
               {/* Clean, Massive Heading */}
               <h1
-                className={`text-2xl sm:text-4xl lg:text-[52px] font-light leading-tight sm:leading-[58px] lg:leading-[62px] tracking-tight text-white transition-all duration-700 delay-500 transform ${isSelected ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                className={`text-2xl sm:text-4xl lg:text-[52px] font-light leading-tight sm:leading-14.5 lg:leading-15.5 tracking-tight text-white transition-all duration-700 delay-500 transform ${isSelected ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                   }`}
               >
                 {slide.title.split(' ').map((word, i) =>
@@ -163,7 +163,7 @@ const HeroBanner: React.FC = () => {
               className="relative py-2 focus:outline-none cursor-pointer group"
             >
               <div
-                className={`h-[3px] rounded-full transition-all duration-500 ${isActive ? "w-8 bg-white" : "w-4 bg-neutral-600 group-hover:bg-neutral-400"
+                className={`h-0.75 rounded-full transition-all duration-500 ${isActive ? "w-8 bg-white" : "w-4 bg-neutral-600 group-hover:bg-neutral-400"
                   }`}
               />
             </button>
