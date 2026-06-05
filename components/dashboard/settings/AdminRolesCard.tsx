@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Plus, Pencil } from "lucide-react";
+import { ColumnDef, DataTable } from "@/components/shared/table/DataTable";
 
 interface AdminUser {
   name: string;
@@ -42,9 +43,51 @@ const roleBadges = {
 };
 
 export default function AdminRolesCard() {
+  const columns: ColumnDef<AdminUser>[] = [
+    {
+      header: "User",
+      className: "px-6", // Retains precise header padding boundaries
+      render: (user) => (
+        <div className="flex items-center gap-3">
+          <div className="h-8 w-8 bg-slate-100 rounded-full flex items-center justify-center font-bold text-slate-700 text-[11px] border border-slate-200">
+            {user.initials}
+          </div>
+          <div>
+            <p className="font-bold text-slate-900">{user.name}</p>
+            <p className="text-[11px] text-slate-400 mt-0.5 font-normal">{user.email}</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      header: "Role",
+      className: "px-4",
+      render: (user) => <span className={roleBadges[user.role]}>{user.role}</span>,
+    },
+    {
+      header: "Status",
+      className: "px-4",
+      render: (user) => (
+        <div className="flex items-center gap-1.5 text-slate-700">
+          <span className={`h-1.5 w-1.5 rounded-full ${user.status === "Active" ? "bg-emerald-500" : "bg-amber-500"}`} />
+          {user.status}
+        </div>
+      ),
+    },
+    {
+      header: "Actions",
+      className: "px-6 text-right",
+      render: () => (
+        <button className="p-1 text-slate-400 hover:text-slate-900 rounded hover:bg-slate-100 transition-colors cursor-pointer">
+          <Pencil className="h-3.5 w-3.5" />
+        </button>
+      ),
+    },
+  ];
+
   return (
     <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
-      {/* Table Title Module */}
+      {/* Table Title Module Explicitly Maintained */}
       <div className="p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-100">
         <div>
           <h2 className="text-base font-bold text-slate-900">Admin Roles</h2>
@@ -56,50 +99,16 @@ export default function AdminRolesCard() {
         </button>
       </div>
 
-      {/* Responsive Table Context */}
-      <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse">
-          <thead>
-            <tr className="bg-slate-50/70 border-b border-slate-100 text-[10px] font-bold tracking-wider text-slate-400 uppercase">
-              <th className="py-3 px-6">User</th>
-              <th className="py-3 px-4">Role</th>
-              <th className="py-3 px-4">Status</th>
-              <th className="py-3 px-6 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100 text-xs font-medium">
-            {teamAdmins.map((user) => (
-              <tr key={user.email} className="hover:bg-slate-50/40 transition-colors">
-                <td className="py-3.5 px-6">
-                  <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 bg-slate-100 rounded-full flex items-center justify-center font-bold text-slate-700 text-[11px] border border-slate-200">
-                      {user.initials}
-                    </div>
-                    <div>
-                      <p className="font-bold text-slate-900">{user.name}</p>
-                      <p className="text-[11px] text-slate-400 mt-0.5 font-normal">{user.email}</p>
-                    </div>
-                  </div>
-                </td>
-                <td className="py-3.5 px-4">
-                  <span className={roleBadges[user.role]}>{user.role}</span>
-                </td>
-                <td className="py-3.5 px-4">
-                  <div className="flex items-center gap-1.5 text-slate-700">
-                    <span className={`h-1.5 w-1.5 rounded-full ${user.status === "Active" ? "bg-emerald-500" : "bg-amber-500"}`} />
-                    {user.status}
-                  </div>
-                </td>
-                <td className="py-3.5 px-6 text-right">
-                  <button className="p-1 text-slate-400 hover:text-slate-900 rounded hover:bg-slate-100 transition-colors cursor-pointer">
-                    <Pencil className="h-3.5 w-3.5" />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {/* Shared generic datatable inheriting structural setups override */}
+      <DataTable
+        data={teamAdmins}
+        columns={columns}
+        rowKey={(user) => user.email}
+        containerBorderClass="border-transparent rounded-none border-0 shadow-none" // Prevents nested layout double-borders
+        headerRowClass="bg-slate-50/70 border-b border-slate-100 text-[10px] font-bold tracking-wider text-slate-400 uppercase"
+        bodyRowClass="hover:bg-slate-50/40"
+        divideClass="divide-slate-100 text-xs font-medium" // Applies the specific text-xs setting of the original
+      />
     </div>
   );
 }
