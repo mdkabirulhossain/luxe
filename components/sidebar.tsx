@@ -41,35 +41,26 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const router = useRouter();
 
-  // State to track expanded category menus
-  const [expandedCategories, setExpandedCategories] = useState<{ [key: string]: boolean }>({
-    "Woman's Fashion": false,
-    "Men's Fashion": false,
-  });
+  // Track only ONE active open category name at a time. If another opens, this one closes.
+  const [openCategory, setOpenCategory] = useState<string | null>(null);
 
-  // Automatically expand active category when activeCategory changes
+  // Automatically expand the active category layout on initial mount or route changes
   useEffect(() => {
-    if (activeCategory === "Woman's Fashion" || activeCategory === "Men's Fashion") {
-      setExpandedCategories((prev) => ({
-        ...prev,
-        [activeCategory]: true,
-      }));
+    if (activeCategory) {
+      setOpenCategory(activeCategory);
     }
   }, [activeCategory]);
 
   const handleToggleExpand = (catName: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    setExpandedCategories((prev) => ({
-      ...prev,
-      [catName]: !prev[catName],
-    }));
+    // If it's already open, close it. Otherwise, set it as the ONLY open category.
+    setOpenCategory((current) => (current === catName ? null : catName));
   };
 
   const handleSelect = (category: string, subcategory?: string) => {
     if (onSelect) {
       onSelect(category, subcategory);
     } else {
-      // If no callback, route to products page with search parameters
       let url = `/products?category=${encodeURIComponent(category)}`;
       if (subcategory) {
         url += `&sub=${encodeURIComponent(subcategory)}`;
@@ -85,8 +76,8 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div className="w-full lg:w-64 lg:border-r lg:border-gray-200 lg:pt-10 lg:pr-8 shrink-0 flex flex-col">
-      {/* ── MOBILE & TABLET CATEGORIES: Horizontal scroll chips ── */}
-      <div className="w-full lg:hidden py-4 border-b border-gray-100 bg-white sticky top-20 z-20 overflow-visible">
+      {/* ── MOBILE & TABLET CATEGORIES ── */}
+      <div className="w-full lg:hidden py-4 border-b border-b-gray-100 bg-white sticky top-20 z-20 overflow-visible">
         <div className="flex gap-3 overflow-x-auto scrollbar-none px-1 whitespace-nowrap pb-1">
           {sidebarCategories.map((cat, idx) => {
             const isActive = activeCategory === cat.name;
@@ -111,7 +102,6 @@ const Sidebar: React.FC<SidebarProps> = ({
           })}
         </div>
 
-        {/* Mobile secondary subcategory row */}
         {mobileSubOptions && mobileSubOptions.length > 0 && (
           <div className="flex gap-2 overflow-x-auto scrollbar-none px-1 py-2 mt-2 whitespace-nowrap">
             <button
@@ -144,25 +134,27 @@ const Sidebar: React.FC<SidebarProps> = ({
         )}
       </div>
 
-      {/* ── DESKTOP SIDEBAR: Standard vertical menu ── */}
+      {/* ── DESKTOP SIDEBAR ── */}
       <aside className="hidden lg:block w-full">
         <ul className="space-y-4">
           {sidebarCategories.map((cat, idx) => {
             const isActive = activeCategory === cat.name;
-            const isExpanded = expandedCategories[cat.name];
+            const isExpanded = openCategory === cat.name;
+            
             return (
-              <li key={idx} className="flex flex-col select-none">
-                {/* Category Header Link / Toggler Row */}
+              <li key={idx} className="relative flex flex-col select-none">
+                {/* Category Header Link */}
                 <div
                   onClick={(e) => {
                     if (cat.subOptions) {
                       handleToggleExpand(cat.name, e);
                     } else {
+                      setOpenCategory(null);
                       handleSelect(cat.name);
                     }
                   }}
                   className={`flex justify-between items-center text-base cursor-pointer py-1 transition-colors ${
-                    isActive ? "text-[#DB4444] font-semibold" : "text-black hover:text-[#DB4444]"
+                    isActive ? "text-[#DB4444] font-medium" : "text-black hover:text-[#DB4444]"
                   }`}
                 >
                   <span>{cat.name}</span>
@@ -185,9 +177,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                   )}
                 </div>
 
-                {/* Subcategory collapsible dropdown list inline under parent */}
+                {/* Vertical Dropdown Overlay Panel (Floats right underneath this specific item) */}
                 {cat.subOptions && isExpanded && (
-                  <ul className="pl-4 mt-2 space-y-2 border-l border-gray-150 ml-1">
+                  <ul className="absolute left-0 top-full mt-1 w-full min-w-[200px] bg-white border border-gray-100 shadow-xl rounded-md py-2.5 px-3 space-y-2 z-50">
                     {cat.subOptions.map((sub) => {
                       const isSubActive = activeCategory === cat.name && activeSubcategory === sub;
                       return (
@@ -197,10 +189,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                             e.stopPropagation();
                             handleSelect(cat.name, sub);
                           }}
-                          className={`text-sm cursor-pointer py-0.5 transition-colors ${
+                          className={`text-sm cursor-pointer py-1 px-2 rounded transition-colors ${
                             isSubActive
-                              ? "text-[#DB4444] font-semibold"
-                              : "text-gray-500 hover:text-[#DB4444]"
+                              ? "text-[#DB4444] font-medium bg-red-50/60"
+                              : "text-gray-600 hover:text-[#DB4444] hover:bg-gray-50"
                           }`}
                         >
                           {sub}
