@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Edit2, Trash2, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 export type StockStatus = "In Stock" | "Low Stock" | "Out of Stock";
 
@@ -45,14 +46,17 @@ export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) 
           <tbody className="divide-y divide-slate-50 text-sm font-medium text-slate-700">
             {products.map((product) => (
               <tr key={product.id} className="hover:bg-slate-50/30 transition-colors">
-                
+
                 {/* Product Thumbnail Asset */}
                 <td className="py-4 px-6">
-                  <div className="w-12 h-12 rounded-lg bg-slate-100 border border-slate-200 overflow-hidden flex items-center justify-center">
-                    <img 
-                      src={product.imageSrc} 
-                      alt={product.name} 
-                      className="w-full h-full object-cover"
+                  {/* Added 'relative' to the container so 'fill' scopes correctly */}
+                  <div className="relative w-12 h-12 rounded-lg bg-slate-100 border border-slate-200 overflow-hidden">
+                    <Image
+                      src={product.imageSrc}
+                      alt={product.name}
+                      fill
+                      sizes="48px" // Optimizes image delivery for a 12x12 (48px) slot
+                      className="object-cover"
                     />
                   </div>
                 </td>
@@ -87,14 +91,14 @@ export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) 
                 {/* Row Controls */}
                 <td className="py-4 px-6 text-right">
                   <div className="flex items-center justify-end gap-3 text-slate-400">
-                    <button 
+                    <button
                       onClick={() => onEdit?.(product.id)}
                       className="hover:text-slate-900 transition-colors p-1"
                       aria-label="Edit product"
                     >
                       <Edit2 className="h-4 w-4" />
                     </button>
-                    <button 
+                    <button
                       onClick={() => onDelete?.(product.id)}
                       className="hover:text-rose-600 transition-colors p-1"
                       aria-label="Delete product"
