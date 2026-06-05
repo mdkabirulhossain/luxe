@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 // components/ProductCard.tsx
 "use client";
 
@@ -137,49 +136,23 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   const isWishlistOrJFY = variant === "wishlist" || variant === "just-for-you";
 
-  // Dynamic Tailwind styling computed depending on the component's variant
-  const containerClassName =
-    variant === "explore"
-      ? "snap-start shrink-0 w-67.5 sm:w-auto group relative flex flex-col mx-auto"
-      : isWishlistOrJFY
-      ? "group flex flex-col space-y-3 relative"
-      : "group relative flex flex-col w-full min-w-67.5 max-w-67.5";
+  // Unify wrapper sizes across components to ensure grid items match perfectly
+  const containerClassName = "group relative flex flex-col w-full max-w-[270px] mx-auto select-none";
 
-  const imageAreaClassName = isWishlistOrJFY
-    ? "bg-[#F5F5F5] rounded relative aspect-270/250 flex items-center justify-center overflow-hidden p-6 cursor-pointer"
-    : "relative w-full h-62.5 bg-gray-100 flex items-center justify-center rounded-sm overflow-hidden cursor-pointer";
+  // Global gray card background definition matching the UI layout precisely
+  const imageAreaClassName = "relative w-full aspect-[270/250] bg-[#F5F5F5] flex items-center justify-center rounded overflow-hidden p-4 cursor-pointer";
 
-  const discountBadgeClassName = isWishlistOrJFY
-    ? "absolute top-3 left-3 bg-[#DB4444] text-white font-normal text-xs px-3 py-1.5 rounded z-10"
-    : "absolute top-3 left-3 bg-red-500 text-white text-xs px-3 py-1 rounded-sm font-medium z-10";
+  // Global uniform badge classes matching styling variations
+  const discountBadgeClassName = "absolute top-3 left-3 bg-[#DB4444] text-white font-normal text-xs px-2.5 py-1 rounded-sm z-10";
+  const newBadgeClassName = "absolute top-3 left-3 bg-[#00FF66] text-black font-medium text-xs px-2.5 py-1 rounded-sm uppercase tracking-wider z-10";
 
-  const newBadgeClassName = isWishlistOrJFY
-    ? "absolute top-3 left-3 bg-[#00FF66] text-black font-medium text-xs px-3 py-1.5 rounded uppercase tracking-wider z-10"
-    : "absolute top-3 left-3 bg-[#00FF66] text-white text-[10px] uppercase font-semibold px-2.5 py-1 rounded-sm z-10";
+  // Core typography rules
+  const titleClassName = "text-base font-medium text-black line-clamp-1 cursor-pointer hover:underline tracking-wide";
+  const currentPriceClassName = "text-[#DB4444] font-medium text-base";
+  const originalPriceClassName = "text-gray-400 font-normal line-through text-base";
 
-  const detailsClassName = isWishlistOrJFY
-    ? "flex flex-col space-y-1 pt-1"
-    : "flex flex-col pt-4 pb-2 space-y-1.5";
-
-  const titleClassName = isWishlistOrJFY
-    ? "font-medium text-base text-black tracking-wide truncate cursor-pointer hover:underline"
-    : "text-base font-medium text-black line-clamp-1 cursor-pointer hover:underline";
-
-  const priceContainerClassName = isWishlistOrJFY
-    ? "flex items-center gap-3 text-base"
-    : "flex items-center gap-3 font-medium text-sm";
-
-  const currentPriceClassName = isWishlistOrJFY ? "text-[#DB4444] font-medium" : "text-red-500";
-  const originalPriceClassName = isWishlistOrJFY
-    ? "text-gray-400 font-normal line-through"
-    : "text-gray-400 line-through";
-
-  const starColorClass =
-    variant === "just-for-you"
-      ? "text-[#FFAD33]"
-      : variant === "explore"
-      ? "text-yellow-500"
-      : "text-orange-400";
+  // Harmonized warm amber-orange star color profile matching your references
+  const starColorClass = "text-[#FFAD33]";
 
   return (
     <div className={containerClassName}>
@@ -193,7 +166,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <span className={newBadgeClassName}>New</span>
         )}
 
-        {/* Action Buttons */}
+        {/* Action Buttons Layer */}
         {variant === "wishlist" && (
           <button
             className="absolute top-3 right-3 bg-white p-2 rounded-full text-black hover:bg-gray-100 transition-colors shadow-sm z-10"
@@ -205,6 +178,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <TrashIcon />
           </button>
         )}
+
         {variant === "just-for-you" && (
           <button
             className="absolute top-3 right-3 bg-white p-2 rounded-full text-black hover:bg-gray-100 transition-colors shadow-sm z-10"
@@ -217,10 +191,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <EyeIcon />
           </button>
         )}
+
         {!isWishlistOrJFY && (
           <div className="absolute top-3 right-3 flex flex-col gap-2 z-10">
             <button
-              className="bg-white p-1.5 rounded-full hover:bg-gray-50 transition-colors shadow-sm text-black"
+              className="bg-white p-2 rounded-full hover:bg-gray-100 transition-colors shadow-sm text-black"
               onClick={(e) => {
                 e.stopPropagation();
               }}
@@ -228,7 +203,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               <HeartIcon />
             </button>
             <button
-              className="bg-white p-1.5 rounded-full hover:bg-gray-50 transition-colors shadow-sm text-black"
+              className="bg-white p-2 rounded-full hover:bg-gray-100 transition-colors shadow-sm text-black"
               onClick={(e) => {
                 e.stopPropagation();
                 handleNavigate();
@@ -239,33 +214,23 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         )}
 
-        {/* Main Product Image */}
-        {isWishlistOrJFY ? (
-          <div className="relative w-full h-37.5 transition-transform duration-300 group-hover:scale-105">
-            <Image
-              src={product.image}
-              alt={product.title}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 25vw"
-              className="object-contain mix-blend-multiply"
-            />
-          </div>
-        ) : (
-          <img
+        {/* Unified Next.js Image Element Container with Matching Percentage Ratio Ratios */}
+        <div className="relative w-full h-[65%] max-w-[80%] mx-auto transition-transform duration-300 group-hover:scale-105">
+          <Image
             src={product.image}
             alt={product.title}
-            className={
-              variant === "explore"
-                ? "object-contain max-h-40 w-auto max-w-[80%] transition-transform duration-300 group-hover:scale-105 mix-blend-multiply"
-                : "object-contain max-h-45 w-auto mix-blend-multiply"
-            }
+            fill
+            sizes="(max-width: 270px) 100vw, 220px"
+            className="object-cover select-none pointer-events-none mix-blend-multiply"
+            priority={variant === "flash-sales"}
           />
-        )}
+        </div>
 
-        {/* Dynamic Add to Cart buttons */}
-        {isWishlistOrJFY ? (
+        {/* Dynamic Add to Cart Trays */}
+        {variant === "wishlist" ? (
+          // Permanently visible black layout bar block matching your keyboard reference
           <button
-            className="absolute bottom-0 left-0 right-0 bg-black text-white text-xs font-normal py-2.5 flex items-center justify-center gap-2 transition-all duration-200 z-10"
+            className="absolute bottom-0 left-0 right-0 bg-black text-white text-xs font-normal py-3 flex items-center justify-center gap-2 z-10"
             onClick={(e) => {
               e.stopPropagation();
             }}
@@ -273,18 +238,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <CartIcon />
             Add To Cart
           </button>
-        ) : variant === "explore" ? (
-          <button
-            className="absolute bottom-0 left-0 w-full bg-black text-white py-2.5 text-center text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            Add To Cart
-          </button>
         ) : (
+          // Dynamic slide-in / reveal action layout for remaining categories
           <button
-            className="absolute bottom-0 left-0 w-full bg-black text-white py-2.5 text-center text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className="absolute bottom-0 left-0 right-0 bg-black text-white py-3 text-center text-xs font-normal opacity-0 group-hover:opacity-100 transition-all duration-300 z-10"
             onClick={(e) => {
               e.stopPropagation();
             }}
@@ -295,17 +252,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       {/* ── Product Details Box ── */}
-      <div className={detailsClassName}>
+      <div className="flex flex-col pt-3 pb-1 space-y-1.5">
         <h3 className={titleClassName} onClick={handleNavigate}>
           {product.title}
         </h3>
-        
-        <div className={priceContainerClassName}>
+
+        <div className="flex items-center gap-3">
           <span className={currentPriceClassName}>${product.currentPrice}</span>
           {product.originalPrice !== undefined && (
             <span className={originalPriceClassName}>${product.originalPrice}</span>
           )}
-          {/* Inline explore variant rating info */}
+
+          {/* Inline explore variant rating metric alignment */}
           {variant === "explore" && product.rating !== undefined && (
             <>
               <div className="flex items-center ml-auto">
@@ -318,21 +276,21 @@ const ProductCard: React.FC<ProductCardProps> = ({
           )}
         </div>
 
-        {/* Standard rating block for variants other than explore and wishlist */}
+        {/* Standard block-level ratings for alternative variants */}
         {variant !== "explore" && variant !== "wishlist" && product.rating !== undefined && (
           <div className="flex items-center gap-2">
             <div className="flex items-center">
               {renderStars(product.rating, starColorClass)}
             </div>
-            <span className="text-xs font-semibold text-gray-500">
+            <span className="text-xs font-semibold text-gray-400">
               ({product.reviewsCount})
             </span>
           </div>
         )}
 
-        {/* Dynamic color swatches for explore variant */}
+        {/* Dynamic color swatches for explore selection workflows */}
         {variant === "explore" && product.colors && product.colors.length > 0 && (
-          <div className="flex items-center gap-2 pt-1">
+          <div className="flex items-center gap-2 pt-0.5">
             {product.colors.map((colorClass, idx) => (
               <button
                 key={idx}
@@ -340,9 +298,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   e.stopPropagation();
                   handleColorSelect(idx);
                 }}
-                className={`w-4 h-4 rounded-full ${colorClass} relative transition-transform hover:scale-110 ${
-                  activeColorIndex === idx ? "ring-2 ring-offset-2 ring-black" : ""
-                }`}
+                className={`w-3.5 h-3.5 rounded-full ${colorClass} relative transition-transform hover:scale-110 ${activeColorIndex === idx ? "ring-2 ring-offset-2 ring-black" : ""
+                  }`}
                 aria-label={`Select color option ${idx + 1}`}
               />
             ))}
