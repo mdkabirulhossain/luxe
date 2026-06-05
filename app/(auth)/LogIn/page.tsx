@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const LogInPage: React.FC = () => {
   // Local state management for authenticated input collection
@@ -23,7 +24,7 @@ const LogInPage: React.FC = () => {
   };
 
   return (
-    <main className="w-full min-h-screen bg-white text-black font-sans flex items-center justify-center p-4 md:p-0 select-none">
+    <main className="w-full bg-white text-black font-sans flex items-center justify-center p-4 md:p-0 py-12 md:py-20 select-none">
       <div className="max-w-275 w-full flex flex-col md:flex-row items-stretch bg-white border border-gray-100 shadow-xl rounded-md overflow-hidden">
         
         {/* LEFT COLUMN: Premium Side Illustration Frame */}
@@ -104,6 +105,17 @@ const LogInPage: React.FC = () => {
             </div>
 
           </form>
+
+          {/* Footer: Sign Up redirect for new users */}
+          <div className="w-full text-center text-sm font-light text-gray-700 flex items-center justify-center gap-1.5 selection:bg-red-500">
+            <span>Don&apos;t have an account?</span>
+            <Link
+              href="/SignUp"
+              className="font-normal text-black hover:text-red-500 hover:underline underline-offset-4 decoration-1 transition-all"
+            >
+              Sign Up
+            </Link>
+          </div>
 
         </div>
       </div>

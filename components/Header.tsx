@@ -167,10 +167,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 
+const AUTH_KEY = 'luxe_isLoggedIn';
+
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchVisibleOnMobile, setIsSearchVisibleOnMobile] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   
   const mobileSearchInputRef = useRef<HTMLInputElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -181,6 +184,23 @@ const Header: React.FC = () => {
     setTimeout(() => {
       mobileSearchInputRef.current?.focus();
     }, 100);
+  };
+
+  // Sync auth state from localStorage on mount and across tabs
+  useEffect(() => {
+    const syncAuth = () => {
+      setIsLoggedIn(localStorage.getItem(AUTH_KEY) === 'true');
+    };
+    syncAuth();
+    window.addEventListener('storage', syncAuth);
+    return () => window.removeEventListener('storage', syncAuth);
+  }, []);
+
+  // Logout handler: clears auth flag and collapses menus
+  const handleLogout = () => {
+    localStorage.removeItem(AUTH_KEY);
+    setIsLoggedIn(false);
+    setIsUserMenuOpen(false);
   };
 
   // Close user dropdown if clicked outside
@@ -231,7 +251,7 @@ const Header: React.FC = () => {
           <Link href="/" className="underline underline-offset-8 decoration-2 decoration-black transition-all">Home</Link>
           <Link href="/contact" className="hover:underline underline-offset-8 decoration-1 transition-all">Contact</Link>
           <Link href="/about" className="hover:underline underline-offset-8 decoration-1 transition-all">About</Link>
-          <Link href="/SignUp" className="hover:underline underline-offset-8 decoration-1 transition-all">Sign Up</Link>
+          <Link href="/products" className="hover:underline underline-offset-8 decoration-1 transition-all">Product</Link>
         </nav>
 
         {/* Right Section: Utilities + Global Actions */}
@@ -301,70 +321,89 @@ const Header: React.FC = () => {
      </span>
     </Link>
 
-          {/* User Account Dropdown Trigger */}
-          <div className="relative" ref={userMenuRef}>
-            <button 
-              onClick={() => {
-                setIsUserMenuOpen(!isUserMenuOpen);
-                if (!isUserMenuOpen) {
-                  setIsMobileMenuOpen(false);
-                  setIsSearchVisibleOnMobile(false);
-                }
-              }}
-              className={`p-1.5 rounded-full transition-all duration-200 ${
-                isUserMenuOpen ? 'bg-red-500 text-white' : 'bg-transparent text-black hover:bg-gray-100'
-              }`}
-              aria-label="Toggle user menu"
+          {/* Auth Section: Login icon when logged out, Profile dropdown when logged in */}
+          {!isLoggedIn ? (
+            // ── NOT LOGGED IN: show a Login icon that navigates to /LogIn ──
+            <Link
+              href="/LogIn"
+              className="p-1.5 rounded-full text-black hover:bg-gray-100 transition-all duration-200 flex items-center justify-center"
+              aria-label="Go to login page"
+              title="Log in"
             >
+              {/* Login / Enter icon */}
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
               </svg>
-            </button>
+            </Link>
+          ) : (
+            // ── LOGGED IN: show User/Profile dropdown ──
+            <div className="relative" ref={userMenuRef}>
+              <button 
+                onClick={() => {
+                  setIsUserMenuOpen(!isUserMenuOpen);
+                  if (!isUserMenuOpen) {
+                    setIsMobileMenuOpen(false);
+                    setIsSearchVisibleOnMobile(false);
+                  }
+                }}
+                className={`p-1.5 rounded-full transition-all duration-200 ${
+                  isUserMenuOpen ? 'bg-red-500 text-white' : 'bg-transparent text-black hover:bg-gray-100'
+                }`}
+                aria-label="Toggle user menu"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </button>
 
-            {/* Dropdown Menu Overlay matching the requested image layout */}
-            {isUserMenuOpen && (
-              <div className="absolute right-0 mt-3 w-56 rounded-md shadow-2xl bg-linear-to-br from-neutral-800 via-neutral-900 to-stone-950 backdrop-blur-md border border-neutral-700/30 py-3 z-60 transition-all duration-200">
-                <div className="flex flex-col space-y-0.5 text-white text-sm">
-                  
-                  <Link href="/account" className="flex items-center gap-3 px-4 py-2.5 hover:bg-white/10 transition-colors" onClick={() => setIsUserMenuOpen(false)}>
-                    <svg className="w-5 h-5 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    <span>Manage My Account</span>
-                  </Link>
+              {/* Dropdown Menu */}
+              {isUserMenuOpen && (
+                <div className="absolute right-0 mt-3 w-56 rounded-md shadow-2xl bg-linear-to-br from-neutral-800 via-neutral-900 to-stone-950 backdrop-blur-md border border-neutral-700/30 py-3 z-60 transition-all duration-200">
+                  <div className="flex flex-col space-y-0.5 text-white text-sm">
+                    
+                    <Link href="/account" className="flex items-center gap-3 px-4 py-2.5 hover:bg-white/10 transition-colors" onClick={() => setIsUserMenuOpen(false)}>
+                      <svg className="w-5 h-5 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                      <span>Manage My Account</span>
+                    </Link>
 
-                  <Link href="/orders" className="flex items-center gap-3 px-4 py-2.5 hover:bg-white/10 transition-colors" onClick={() => setIsUserMenuOpen(false)}>
-                    <svg className="w-5 h-5 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
-                    <span>My Order</span>
-                  </Link>
+                    <Link href="/orders" className="flex items-center gap-3 px-4 py-2.5 hover:bg-white/10 transition-colors" onClick={() => setIsUserMenuOpen(false)}>
+                      <svg className="w-5 h-5 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                      </svg>
+                      <span>My Order</span>
+                    </Link>
 
-                  <Link href="/cancellations" className="flex items-center gap-3 px-4 py-2.5 hover:bg-white/10 transition-colors" onClick={() => setIsUserMenuOpen(false)}>
-                    <svg className="w-5 h-5 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>My Cancellations</span>
-                  </Link>
+                    <Link href="/cancellations" className="flex items-center gap-3 px-4 py-2.5 hover:bg-white/10 transition-colors" onClick={() => setIsUserMenuOpen(false)}>
+                      <svg className="w-5 h-5 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>My Cancellations</span>
+                    </Link>
 
-                  <Link href="/reviews" className="flex items-center gap-3 px-4 py-2.5 hover:bg-white/10 transition-colors" onClick={() => setIsUserMenuOpen(false)}>
-                    <svg className="w-5 h-5 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                    </svg>
-                    <span>My Reviews</span>
-                  </Link>
+                    <Link href="/reviews" className="flex items-center gap-3 px-4 py-2.5 hover:bg-white/10 transition-colors" onClick={() => setIsUserMenuOpen(false)}>
+                      <svg className="w-5 h-5 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                      </svg>
+                      <span>My Reviews</span>
+                    </Link>
 
-                  <button className="flex items-center gap-3 px-4 py-2.5 hover:bg-white/10 transition-colors text-left w-full" onClick={() => setIsUserMenuOpen(false)}>
-                    <svg className="w-5 h-5 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                    </svg>
-                    <span>Logout</span>
-                  </button>
+                    <button
+                      className="flex items-center gap-3 px-4 py-2.5 hover:bg-white/10 transition-colors text-left w-full"
+                      onClick={handleLogout}
+                    >
+                      <svg className="w-5 h-5 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                      </svg>
+                      <span>Logout</span>
+                    </button>
 
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
 
         </div>
       </div>
@@ -409,7 +448,7 @@ const Header: React.FC = () => {
               <Link href="/" className="pb-2 border-b border-gray-100 text-red-500" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
               <Link href="/contact" className="pb-2 border-b border-gray-100 hover:text-red-500" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
               <Link href="/about" className="pb-2 border-b border-gray-100 hover:text-red-500" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
-              <Link href="/SignUp" className="pb-1 hover:text-red-500" onClick={() => setIsMobileMenuOpen(false)}>Sign Up</Link>
+              <Link href="/products" className="pb-1 hover:text-red-500" onClick={() => setIsMobileMenuOpen(false)}>Product</Link>
             </nav>
           </div>
         </div>

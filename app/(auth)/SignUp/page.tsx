@@ -33,7 +33,7 @@ const SignUpPage: React.FC = () => {
   };
 
   return (
-    <main className="w-full min-h-screen bg-white text-black font-sans flex items-center justify-center p-4 md:p-0 select-none">
+    <main className="w-full bg-white text-black font-sans flex items-center justify-center p-4 md:p-0 py-12 md:py-20 select-none">
       <div className="max-w-275 w-full flex flex-col md:flex-row items-stretch bg-white border border-gray-100 shadow-xl rounded-md overflow-hidden">
         
         {/* LEFT COLUMN: E-Commerce Illustration Area */}
