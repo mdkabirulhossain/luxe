@@ -34,7 +34,7 @@ const INITIAL_SEQUENCING_DATA: SequencingItem[] = [
     image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=200",
   },
   {
-    id: "--",
+    id: "03",
     title: "Holiday Wellness Prep",
     description: "Upcoming Winter campaign for health items.",
     route: "/wellness",

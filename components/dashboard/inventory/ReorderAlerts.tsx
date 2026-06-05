@@ -2,6 +2,7 @@
 
 import React from "react";
 import { AlertCircle } from "lucide-react";
+import { ColumnDef, DataTable } from "@/components/shared/table/DataTable";
 
 interface AlertItem {
   name: string;
@@ -36,9 +37,45 @@ const alertItems: AlertItem[] = [
 ];
 
 export default function ReorderAlerts() {
+  const columns: ColumnDef<AlertItem>[] = [
+    {
+      header: "Item Details",
+      className: "px-6", // Preserves specific side padding variations
+      render: (item) => <span className="font-semibold text-slate-900">{item.name}</span>,
+    },
+    {
+      header: "SKU",
+      className: "px-4 text-xs font-medium text-slate-500 font-mono",
+      render: (item) => item.sku,
+    },
+    {
+      header: "Current Stock",
+      className: "px-4 font-bold",
+      render: (item) => (
+        <span className={item.status === "critical" ? "text-red-500" : "text-amber-500"}>
+          {item.currentStock} units
+        </span>
+      ),
+    },
+    {
+      header: "Safety Stock",
+      className: "px-4 text-slate-500 italic",
+      render: (item) => `${item.safetyStock} units`,
+    },
+    {
+      header: "Action",
+      className: "px-6 text-right",
+      render: () => (
+        <button className="text-xs font-bold text-indigo-600 hover:text-indigo-700 transition-colors">
+          Reorder Now
+        </button>
+      ),
+    },
+  ];
+
   return (
     <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
-      {/* Header */}
+      {/* Header section explicitly retained */}
       <div className="p-6 flex items-center justify-between border-b border-slate-100">
         <div className="flex items-center gap-2">
           <AlertCircle className="h-5 w-5 text-red-500" />
@@ -49,45 +86,16 @@ export default function ReorderAlerts() {
         </span>
       </div>
 
-      {/* Table Wrapper */}
-      <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse">
-          <thead>
-            <tr className="bg-slate-50/70 border-b border-slate-100 text-[11px] font-bold tracking-wider text-slate-500 uppercase">
-              <th className="py-3 px-6">Item Details</th>
-              <th className="py-3 px-4">SKU</th>
-              <th className="py-3 px-4">Current Stock</th>
-              <th className="py-3 px-4">Safety Stock</th>
-              <th className="py-3 px-6 text-right">Action</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100 text-sm">
-            {alertItems.map((item) => (
-              <tr key={item.sku} className="hover:bg-slate-50/50 transition-colors">
-                <td className="py-4 px-6 font-semibold text-slate-900">{item.name}</td>
-                <td className="py-4 px-4 text-xs font-medium text-slate-500 font-mono">
-                  {item.sku}
-                </td>
-                <td className="py-4 px-4 font-bold">
-                  <span
-                    className={
-                      item.status === "critical" ? "text-red-500" : "text-amber-500"
-                    }
-                  >
-                    {item.currentStock} units
-                  </span>
-                </td>
-                <td className="py-4 px-4 text-slate-500 italic">{item.safetyStock} units</td>
-                <td className="py-4 px-6 text-right">
-                  <button className="text-xs font-bold text-indigo-600 hover:text-indigo-700 transition-colors">
-                    Reorder Now
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {/* Shared generic datatable integrating custom classes */}
+      <DataTable
+        data={alertItems}
+        columns={columns}
+        rowKey={(item) => item.sku}
+        containerBorderClass="border-transparent rounded-none border-0 shadow-none" // Bypasses inner card borders
+        headerRowClass="bg-slate-50/70 border-b border-slate-100 text-[11px] font-bold tracking-wider text-slate-500 uppercase"
+        bodyRowClass="hover:bg-slate-50/50"
+        divideClass="divide-slate-100"
+      />
     </div>
   );
 }
