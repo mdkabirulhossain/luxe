@@ -1,5 +1,6 @@
 
 // components/TopHeader.tsx
+import Link from 'next/link';
 import React from 'react';
 
 const TopHeader: React.FC = () => {
@@ -15,21 +16,21 @@ const TopHeader: React.FC = () => {
           <div className="truncate whitespace-nowrap text-gray-200">
             Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
           </div>
-          <a 
-            href="#" 
+          <Link 
+            href="/products" 
             className="underline font-semibold text-white hover:text-gray-300 transition-colors whitespace-nowrap shrink-0 ml-1"
           >
             ShopNow
-          </a>
+          </Link>
         </div>
 
         {/* Language Switch Selector */}
-        <div className="flex items-center gap-1 cursor-pointer hover:text-gray-300 transition-colors shrink-0 select-none text-[11px] sm:text-xs md:text-sm">
+        {/* <div className="flex items-center gap-1 cursor-pointer hover:text-gray-300 transition-colors shrink-0 select-none text-[11px] sm:text-xs md:text-sm">
           <span>English</span>
           <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
           </svg>
-        </div>
+        </div> */}
 
       </div>
     </div>
