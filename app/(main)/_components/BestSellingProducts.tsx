@@ -69,9 +69,9 @@ const BestSellingProducts: React.FC = () => {
       </div>
 
       {/* Grid Container Setup: Responsive fallback flex swiper on tiny mobile screens */}
-      <div className="flex gap-7 overflow-x-auto pb-4 scrollbar-none md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible md:pb-0">
+      <div className="flex gap-7 overflow-x-auto pb-4 scrollbar-none snap-x scroll-smooth md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible md:pb-0">
         {bestSellingData.map((product) => (
-          <div key={product.id} className="shrink-0 md:shrink md:w-full">
+          <div key={product.id} className="snap-start shrink-0 w-67.5 md:shrink md:w-full">
             <ProductCard product={product} variant="best-selling" />
           </div>
         ))}

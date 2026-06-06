@@ -74,18 +74,19 @@ const ExploreOurProducts: React.FC = () => {
       {/* Responsive Grid/Flex View Wrapper */}
       <div 
         ref={gridContainerRef}
-        className="flex gap-7 overflow-x-auto pb-4 scrollbar-none snap-x sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:overflow-visible sm:pb-0 sm:gap-y-10"
+        className="flex gap-7 overflow-x-auto pb-4 scrollbar-none snap-x scroll-smooth sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:overflow-visible sm:pb-0 sm:gap-y-10"
       >
         {exploreProductsData.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            variant="explore"
-            selectedColorIndex={selectedColors[product.id]}
-            onColorSelect={(productId, colorIndex) =>
-              setSelectedColors((prev) => ({ ...prev, [productId]: colorIndex }))
-            }
-          />
+          <div key={product.id} className="snap-start shrink-0 w-67.5 sm:shrink sm:w-full">
+            <ProductCard
+              product={product}
+              variant="explore"
+              selectedColorIndex={selectedColors[product.id]}
+              onColorSelect={(productId, colorIndex) =>
+                setSelectedColors((prev) => ({ ...prev, [productId]: colorIndex }))
+              }
+            />
+          </div>
         ))}
       </div>
 
