@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Plus, Download, ChevronDown, Layers, AlertTriangle, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ProductItem, ProductTable } from "@/components/dashboard/products/ProductTable";
+import { ProductItem, ProductTable } from "@/app/(dashboard)/dashboard/products/_components/ProductTable";
 
 
 // Mocking high-quality placeholder data mirroring image_55e7ad.jpg

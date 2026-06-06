@@ -1,9 +1,9 @@
 "use client";
 
-import AdminRolesCard from "@/components/dashboard/settings/AdminRolesCard";
-import GeneralInfoCard from "@/components/dashboard/settings/GeneralInfoCard";
-import PaymentGatewaysCard from "@/components/dashboard/settings/PaymentGatewaysCard";
-import SettingsTabs from "@/components/dashboard/settings/SettingsTabs";
+import AdminRolesCard from "@/app/(dashboard)/dashboard/settings/_components/AdminRolesCard";
+import GeneralInfoCard from "@/app/(dashboard)/dashboard/settings/_components/GeneralInfoCard";
+import PaymentGatewaysCard from "@/app/(dashboard)/dashboard/settings/_components/PaymentGatewaysCard";
+import SettingsTabs from "@/app/(dashboard)/dashboard/settings/_components/SettingsTabs";
 import React, { useState } from "react";
 
 

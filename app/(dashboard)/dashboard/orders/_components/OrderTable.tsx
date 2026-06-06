@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { OrderStatus, StatusBadge } from "./StatusBadge";
+import { OrderStatus, StatusBadge } from "../../../../../components/dashboard/orders/StatusBadge";
 import { ColumnDef, DataTable } from "@/components/shared/table/DataTable";
 
 export interface OrderItem {
