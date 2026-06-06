@@ -16,15 +16,15 @@ export function RegionalReach() {
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       
       {/* Visual Dot Scatter Map Node Block */}
-      <Card className="lg:col-span-2 bg-white border-slate-100 shadow-sm overflow-hidden min-h-[300px] relative flex flex-col justify-between">
-        <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px] opacity-70" />
+      <Card className="lg:col-span-2 bg-white border-slate-100 shadow-sm overflow-hidden min-h-75 relative flex flex-col justify-between">
+        <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] bg-size-[16px_16px] opacity-70" />
         
         {/* Scatter Geo Coordinates */}
         <div className="absolute top-[35%] left-[25%] w-3 h-3 bg-indigo-600 rounded-full shadow-[0_0_0_4px_rgba(99,102,241,0.2)]" />
         <div className="absolute top-[55%] left-[50%] w-5 h-5 bg-indigo-600 rounded-full shadow-[0_0_0_6px_rgba(99,102,241,0.15)] animate-pulse" />
         <div className="absolute top-[70%] left-[75%] w-2.5 h-2.5 bg-indigo-600 rounded-full shadow-[0_0_0_4px_rgba(99,102,241,0.2)]" />
 
-        <div className="absolute bottom-5 left-5 bg-white border border-slate-100 shadow-md rounded-xl p-4 max-w-[240px] z-10 text-left">
+        <div className="absolute bottom-5 left-5 bg-white border border-slate-100 shadow-md rounded-xl p-4 max-w-60 z-10 text-left">
           <h4 className="text-xs font-bold text-slate-900">Global Reach</h4>
           <p className="text-[11px] text-slate-400 font-medium mt-0.5 leading-relaxed">
             Data localized by IP address tracking.

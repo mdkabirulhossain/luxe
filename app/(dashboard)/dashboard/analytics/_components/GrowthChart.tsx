@@ -43,7 +43,7 @@ export function GrowthChart() {
         </div>
       </CardHeader>
       <CardContent className="p-6 pt-0">
-        <ChartContainer config={chartConfig} className="h-[280px] w-full">
+        <ChartContainer config={chartConfig} className="h-70 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chartData} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
               <CartesianGrid vertical={false} stroke="#f1f5f9" />
