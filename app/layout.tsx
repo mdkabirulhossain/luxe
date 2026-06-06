@@ -50,7 +50,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Exclusive E-Commerce",
+  title: "Luxe E-Commerce",
   description: "Your premium shopping destination",
 };
 

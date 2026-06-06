@@ -13,9 +13,9 @@ const Footer: React.FC = () => {
       {/* Upper Footer Links Section */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 lg:gap-6 pb-16 border-b border-gray-800">
         
-        {/* COLUMN 1: Exclusive / Subscribe */}
+        {/* COLUMN 1: luxe / Subscribe */}
         <div className="space-y-4">
-          <h2 className="text-2xl font-bold tracking-wider">Exclusive</h2>
+          <h2 className="text-2xl font-bold tracking-wider">Luxe</h2>
           <h3 className="text-xl font-medium">Subscribe</h3>
           <p className="text-sm text-gray-300 font-light">Get 10% off your first order</p>
           
@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
             111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.
           </p>
           <p className="text-sm text-gray-300 wrap-break-word hover:text-gray-400 transition-colors">
-            <a href="mailto:exclusive@gmail.com">exclusive@gmail.com</a>
+            <a href="mailto:luxe@gmail.com">luxe@gmail.com</a>
           </p>
           <p className="text-sm text-gray-300">
             <a href="tel:+88015888889999" className="hover:text-gray-400 transition-colors">

@@ -66,8 +66,8 @@ const ContactPage: React.FC = () => {
               </div>
               <div className="text-sm text-black space-y-3 font-normal leading-relaxed">
                 <p>Fill out our form and we will contact you within 24 hours.</p>
-                <p className="break-all">Emails: customer@exclusive.com</p>
-                <p className="break-all">Emails: support@exclusive.com</p>
+                <p className="break-all">Emails: customer@luxe.com</p>
+                <p className="break-all">Emails: support@luxe.com</p>
               </div>
             </div>
 

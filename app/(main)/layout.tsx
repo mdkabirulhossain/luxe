@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'Exclusive E-Commerce',
+  title: 'Luxe E-Commerce',
   description: 'Your premium shopping destination',
 };
 

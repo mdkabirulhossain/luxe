@@ -32,7 +32,7 @@ const LogInPage: React.FC = () => {
           <div className="relative w-[90%] md:w-[95%] h-[90%] md:h-[95%]">
             <Image 
               src="https://images.unsplash.com/photo-1610438235354-a6fa55280b5c?auto=format&fit=crop&w=600&q=80" 
-              alt="Exclusive E-Commerce Shopping Vector View Illustration" 
+              alt="Luxe E-Commerce Shopping Vector View Illustration" 
               fill 
               sizes="(max-width: 768px) 100vw, 50vw"
               priority
@@ -47,7 +47,7 @@ const LogInPage: React.FC = () => {
           {/* Header Typography Group */}
           <div className="space-y-3">
             <h1 className="text-3xl sm:text-4xl font-semibold tracking-wide text-black">
-              Log in to Exclusive
+              Log in to Luxe
             </h1>
             <p className="text-sm font-light text-black tracking-wide">
               Enter your details below
