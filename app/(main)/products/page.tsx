@@ -262,16 +262,47 @@ function AllProductsPageInner() {
                     value={sortBy}
                     onValueChange={(value) => setSortBy(value)}
                   >
-                    <SelectTrigger className="w-full sm:w-44 bg-white border border-gray-300 rounded text-xs px-3 py-2.5 h-auto focus:ring-1 focus:ring-black text-black cursor-pointer">
+                    <SelectTrigger className="w-full sm:w-44 bg-white border border-gray-300 rounded text-xs px-3 py-2.5 h-auto text-black cursor-pointer [&>span]:font-normal [&>span]:text-black focus:outline-none focus:ring-0 focus:border-gray-300 focus-visible:outline-none focus-visible:ring-0 data-[state=open]:ring-0 data-[state=open]:outline-none data-[state=open]:border-gray-300">
                       <SelectValue placeholder="Best Match" />
                     </SelectTrigger>
-                    <SelectContent position="popper" side="bottom" align="start" sideOffset={4} className="w-(--radix-select-trigger-width)">
-  <SelectItem value="default" className="text-xs font-normal focus:bg-gray-100 data-[state=checked]:font-normal data-[state=checked]:text-black">Best Match</SelectItem>
-  <SelectItem value="price-low-to-high" className="text-xs font-normal focus:bg-gray-100 data-[state=checked]:font-normal data-[state=checked]:text-black">Price: Low to High</SelectItem>
-  <SelectItem value="price-high-to-low" className="text-xs font-normal focus:bg-gray-100 data-[state=checked]:font-normal data-[state=checked]:text-black">Price: High to Low</SelectItem>
-  <SelectItem value="rating" className="text-xs font-normal focus:bg-gray-100 data-[state=checked]:font-normal data-[state=checked]:text-black">Top Rated</SelectItem>
-  <SelectItem value="discount" className="text-xs font-normal focus:bg-gray-100 data-[state=checked]:font-normal data-[state=checked]:text-black">Biggest Saving</SelectItem>
-</SelectContent>
+                    <SelectContent
+                      position="popper"
+                      side="bottom"
+                      align="start"
+                      sideOffset={4}
+                      className="w-(--radix-select-trigger-width)"
+                    >
+                      <SelectItem
+                        value="default"
+                        className="text-xs font-normal text-black focus:bg-gray-100 focus:text-black data-[state=checked]:font-normal data-[state=checked]:text-black data-highlighted:bg-gray-100 data-highlighted:font-normal"
+                      >
+                        Best Match
+                      </SelectItem>
+                      <SelectItem
+                        value="price-low-to-high"
+                        className="text-xs font-normal text-black focus:bg-gray-100 focus:text-black data-[state=checked]:font-normal data-[state=checked]:text-black data-highlighted:bg-gray-100 data-highlighted:font-normal"
+                      >
+                        Price: Low to High
+                      </SelectItem>
+                      <SelectItem
+                        value="price-high-to-low"
+                        className="text-xs font-normal text-black focus:bg-gray-100 focus:text-black data-[state=checked]:font-normal data-[state=checked]:text-black data-highlighted:bg-gray-100 data-highlighted:font-normal"
+                      >
+                        Price: High to Low
+                      </SelectItem>
+                      <SelectItem
+                        value="rating"
+                        className="text-xs font-normal text-black focus:bg-gray-100 focus:text-black data-[state=checked]:font-normal data-[state=checked]:text-black data-highlighted:bg-gray-100 data-highlighted:font-normal"
+                      >
+                        Top Rated
+                      </SelectItem>
+                      <SelectItem
+                        value="discount"
+                        className="text-xs font-normal text-black focus:bg-gray-100 focus:text-black data-[state=checked]:font-normal data-[state=checked]:text-black data-highlighted:bg-gray-100 data-highlighted:font-normal"
+                      >
+                        Biggest Saving
+                      </SelectItem>
+                    </SelectContent>
                   </Select>
                 </div>
               </div>
