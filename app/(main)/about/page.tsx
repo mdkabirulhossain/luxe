@@ -2,9 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import OurStory from '@/components/about/OurStory';
-import StatsSection from '@/components/about/StatsSection';
-import TeamSlider from '@/components/about/TeamSlider';
+import OurStory from '@/app/(main)/about/_components/OurStory';
+import StatsSection from '@/app/(main)/about/_components/StatsSection';
+import TeamSlider from '@/app/(main)/about/_components/TeamSlider';
 import FeaturesSection from '@/components/FeaturesSection';
 
 
