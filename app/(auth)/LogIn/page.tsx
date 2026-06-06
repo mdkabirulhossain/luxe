@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import authImage from '@/assets/auth/authImage.png';
 
 const LogInPage: React.FC = () => {
   // Local state management for authenticated input collection
@@ -31,7 +32,7 @@ const LogInPage: React.FC = () => {
         <div className="flex-1 min-w-75 md:min-w-112.5 bg-[#C5E8E8] relative flex items-center justify-center h-75 md:h-auto">
           <div className="relative w-[90%] md:w-[95%] h-[90%] md:h-[95%]">
             <Image 
-              src="https://images.unsplash.com/photo-1610438235354-a6fa55280b5c?auto=format&fit=crop&w=600&q=80" 
+              src={authImage} 
               alt="Luxe E-Commerce Shopping Vector View Illustration" 
               fill 
               sizes="(max-width: 768px) 100vw, 50vw"

@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import authImage from '@/assets/auth/authImage.png';
 
 const SignUpPage: React.FC = () => {
   // Local state handling for form inputs
@@ -42,7 +43,7 @@ const SignUpPage: React.FC = () => {
           {/* Note: This Unsplash path is used as a temporary mockup; replace with your relative asset path e.g., '/images/signup-main.png' */}
           <div className="relative w-[90%] md:w-[95%] h-[90%] md:h-[95%]">
             <Image 
-              src="https://images.unsplash.com/photo-1610438235354-a6fa55280b5c?auto=format&fit=crop&w=600&q=80" 
+              src={authImage} 
               alt="E-commerce shopping application illustration" 
               fill 
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -124,14 +125,12 @@ const SignUpPage: React.FC = () => {
                 className="bg-white border border-gray-200 hover:border-gray-300 rounded-sm text-sm py-3.5 px-6 w-full flex items-center justify-center gap-2.5 shadow-sm active:scale-99 transition-all"
                 aria-label="Sign up with Google"
               >
-                <Image 
-                  src="https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?auto=format&fit=crop&w=48&q=80" 
-                  alt="" 
-                  width={20} 
-                  height={20} 
-                  className="object-contain" 
-                  aria-hidden="true" // Decorative asset hidden from accessibility trees.
-                />
+              <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+               <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.9 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.1 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.4-.4-3.5z"/>
+               <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16 19 13 24 13c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.1 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+               <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.5 26.8 36 24 36c-5.2 0-9.6-3.1-11.3-7.5l-6.5 5C9.5 39.6 16.2 44 24 44z"/>
+               <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.2-4.3 5.6l6.2 5.2C41.5 35.5 44 30.2 44 24c0-1.2-.1-2.4-.4-3.5z"/>
+             </svg>
                 <span className="text-black font-normal">Sign up with Google</span>
               </button>
             </div>
