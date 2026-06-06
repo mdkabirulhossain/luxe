@@ -78,44 +78,6 @@ const Footer: React.FC = () => {
 
         {/* COLUMN 5: Download App & Socials */}
         <div className="space-y-4">
-          <h3 className="text-xl font-medium tracking-wide">Download App</h3>
-          <p className="text-xs text-gray-400 font-medium">Save $3 with App New User Only</p>
-          
-          {/* QR and App Download Store Interfaces */}
-          <div className="flex items-center gap-3">
-            {/* Mock QR Code Asset block placeholder wrapper container */}
-            <div className="bg-white p-1 rounded-sm shrink-0">
-              <div className="relative w-19 h-19">
-                {/* Replace src with your relative path e.g. /images/qr-code.png */}
-                <Image 
-                  src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=150&q=80" 
-                  alt="QR Code" 
-                  fill 
-                  className="object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Store Download Badges */}
-            <div className="flex flex-col justify-between gap-1.5 h-19">
-              <a href="#" className="relative w-27.5 h-8.5 block" aria-label="Download on Google Play">
-                <Image 
-                  src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=250&q=80" 
-                  alt="Google Play" 
-                  fill 
-                  className="object-contain"
-                />
-              </a>
-              <a href="#" className="relative w-27.5 h-8.5 block" aria-label="Download on App Store">
-                <Image 
-                  src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=250&q=80" 
-                  alt="App Store" 
-                  fill 
-                  className="object-contain"
-                />
-              </a>
-            </div>
-          </div>
 
           {/* Social Platforms Links Handles vector layout */}
           <div className="flex items-center gap-6 pt-2 text-white">
