@@ -5,10 +5,10 @@ import { Calendar, FileDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // Custom Sub-component Modules Imports
-import { KpiSection } from "@/components/dashboard/analytics/kpi-section";
-import { GrowthChart } from "@/components/dashboard/analytics/growth-chart";
-import { TopSpenders } from "@/components/dashboard/analytics/top-spenders";
-import { RegionalReach } from "@/components/dashboard/analytics/regional-reach";
+import { KpiSection } from "@/app/(dashboard)/dashboard/analytics/_components/KpiSection";
+import { GrowthChart } from "@/app/(dashboard)/dashboard/analytics/_components/GrowthChart";
+import { TopSpenders } from "@/app/(dashboard)/dashboard/analytics/_components/TopSpenders";
+import { RegionalReach } from "@/app/(dashboard)/dashboard/analytics/_components/RegionalReach";
 
 export default function AnalyticsPage() {
   return (
