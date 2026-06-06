@@ -1,11 +1,19 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 // app/(main)/products/page.tsx
 "use client";
 
 import React, { useState, useMemo, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import ProductCard, { ProductCardData } from "@/components/shared/product/ProductCard";
+import ProductCard from "@/components/shared/product/ProductCard";
 import Sidebar from "@/components/sidebar";
 import { dummyProducts } from "@/lib/products";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 function AllProductsPageInner() {
   const searchParams = useSearchParams();
@@ -44,7 +52,12 @@ function AllProductsPageInner() {
       } else if (p.id === "ep6") {
         category = "Men's Fashion";
         subcategory = "Pants & Jeans";
-      } else if (p.id === "1" || p.id === "j3" || p.id === "w3" || p.id === "ep7") {
+      } else if (
+        p.id === "1" ||
+        p.id === "j3" ||
+        p.id === "w3" ||
+        p.id === "ep7"
+      ) {
         category = "Electronics"; // Gamepads
       } else if (p.id === "2" || p.id === "j4") {
         category = "Electronics"; // Keyboards
@@ -73,7 +86,9 @@ function AllProductsPageInner() {
       // Calculate discount percentage if originalPrice exists
       let discount: number | undefined = undefined;
       if (p.originalPrice && p.originalPrice > p.price) {
-        discount = Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100);
+        discount = Math.round(
+          ((p.originalPrice - p.price) / p.originalPrice) * 100,
+        );
       }
 
       return {
@@ -124,7 +139,13 @@ function AllProductsPageInner() {
     }
 
     return result;
-  }, [normalizedProducts, searchQuery, selectedCategory, selectedSubcategory, sortBy]);
+  }, [
+    normalizedProducts,
+    searchQuery,
+    selectedCategory,
+    selectedSubcategory,
+    sortBy,
+  ]);
 
   const handleSelectCategory = (category: string, subcategory?: string) => {
     setSelectedCategory(category);
@@ -141,29 +162,33 @@ function AllProductsPageInner() {
   return (
     <div className="bg-white min-h-screen py-12 px-4 md:px-8 lg:px-16 font-sans select-none">
       <div className="max-w-7xl mx-auto space-y-10">
-        
         {/* Breadcrumbs Header */}
         <nav className="flex items-center gap-2 text-xs text-gray-400 font-medium select-none">
-          <span className="hover:text-black transition-colors cursor-pointer">Account</span>
+          <span className="hover:text-black transition-colors cursor-pointer">
+            Account
+          </span>
           <span>/</span>
           <span className="text-black font-semibold">Products</span>
           {selectedCategory !== "All" && (
             <>
               <span>/</span>
-              <span className="text-black font-semibold">{selectedCategory}</span>
+              <span className="text-black font-semibold">
+                {selectedCategory}
+              </span>
             </>
           )}
           {selectedSubcategory && (
             <>
               <span>/</span>
-              <span className="text-black font-semibold">{selectedSubcategory}</span>
+              <span className="text-black font-semibold">
+                {selectedSubcategory}
+              </span>
             </>
           )}
         </nav>
 
         {/* Two Column Layout: Sidebar Left, Products Grid Right */}
         <div className="flex flex-col lg:flex-row gap-10 items-stretch lg:items-start w-full">
-          
           {/* Left sidebar container */}
           <div className="w-full lg:w-64 shrink-0">
             {/* Left Navbar / Categories Sidebar */}
@@ -175,7 +200,9 @@ function AllProductsPageInner() {
               <button
                 onClick={() => handleSelectCategory("All")}
                 className={`w-full text-left py-2 font-medium text-base transition-colors hover:text-[#DB4444] mb-4 border-b border-gray-50 pb-2 hidden lg:block cursor-pointer ${
-                  selectedCategory === "All" ? "text-[#DB4444] font-semibold" : "text-black"
+                  selectedCategory === "All"
+                    ? "text-[#DB4444] font-semibold"
+                    : "text-black"
                 }`}
               >
                 All Categories
@@ -190,16 +217,18 @@ function AllProductsPageInner() {
 
           {/* Right products view area */}
           <div className="w-full lg:flex-1 flex flex-col space-y-6">
-            
             {/* Header: Title, Search, and Sorting */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gray-100 pb-6">
               <div>
                 <h1 className="text-2xl md:text-3xl font-semibold text-black tracking-wide">
-                  {selectedCategory === "All" ? "All Products" : selectedCategory}
+                  {selectedCategory === "All"
+                    ? "All Products"
+                    : selectedCategory}
                   {selectedSubcategory ? ` - ${selectedSubcategory}` : ""}
                 </h1>
                 <p className="text-xs text-gray-500 mt-1">
-                  Showing {filteredProducts.length} of {normalizedProducts.length} items
+                  Showing {filteredProducts.length} of{" "}
+                  {normalizedProducts.length} items
                 </p>
               </div>
 
@@ -226,18 +255,24 @@ function AllProductsPageInner() {
 
                 {/* Sorting Select */}
                 <div className="flex items-center gap-2 w-full sm:w-auto">
-                  <span className="text-xs font-medium text-gray-500 whitespace-nowrap">Sort:</span>
-                  <select
+                  <span className="text-xs font-medium text-gray-500 whitespace-nowrap">
+                    Sort:
+                  </span>
+                  <Select
                     value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    className="w-full sm:w-auto bg-white border border-gray-300 rounded text-xs px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-black text-black cursor-pointer"
+                    onValueChange={(value) => setSortBy(value)}
                   >
-                    <option value="default">Best Match</option>
-                    <option value="price-low-to-high">Price: Low to High</option>
-                    <option value="price-high-to-low">Price: High to Low</option>
-                    <option value="rating">Top Rated</option>
-                    <option value="discount">Biggest Saving</option>
-                  </select>
+                    <SelectTrigger className="w-full sm:w-44 bg-white border border-gray-300 rounded text-xs px-3 py-2.5 h-auto focus:ring-1 focus:ring-black text-black cursor-pointer">
+                      <SelectValue placeholder="Best Match" />
+                    </SelectTrigger>
+                    <SelectContent position="popper" side="bottom" align="start" sideOffset={4} className="w-(--radix-select-trigger-width)">
+  <SelectItem value="default" className="text-xs font-normal focus:bg-gray-100 data-[state=checked]:font-normal data-[state=checked]:text-black">Best Match</SelectItem>
+  <SelectItem value="price-low-to-high" className="text-xs font-normal focus:bg-gray-100 data-[state=checked]:font-normal data-[state=checked]:text-black">Price: Low to High</SelectItem>
+  <SelectItem value="price-high-to-low" className="text-xs font-normal focus:bg-gray-100 data-[state=checked]:font-normal data-[state=checked]:text-black">Price: High to Low</SelectItem>
+  <SelectItem value="rating" className="text-xs font-normal focus:bg-gray-100 data-[state=checked]:font-normal data-[state=checked]:text-black">Top Rated</SelectItem>
+  <SelectItem value="discount" className="text-xs font-normal focus:bg-gray-100 data-[state=checked]:font-normal data-[state=checked]:text-black">Biggest Saving</SelectItem>
+</SelectContent>
+                  </Select>
                 </div>
               </div>
             </div>
@@ -273,14 +308,27 @@ function AllProductsPageInner() {
             ) : (
               <div className="w-full flex flex-col items-center justify-center py-20 text-center space-y-4">
                 <div className="w-16 h-16 rounded-full bg-gray-50 flex items-center justify-center text-gray-400">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  <svg
+                    className="w-8 h-8"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
                   </svg>
                 </div>
                 <div className="space-y-1">
-                  <h3 className="text-base font-semibold text-black">No Products Found</h3>
+                  <h3 className="text-base font-semibold text-black">
+                    No Products Found
+                  </h3>
                   <p className="text-xs text-gray-500 max-w-xs">
-                    We couldn&apos;t find any matches for your query. Try resetting your search or category filters.
+                    We couldn&apos;t find any matches for your query. Try
+                    resetting your search or category filters.
                   </p>
                 </div>
                 <button
@@ -291,11 +339,8 @@ function AllProductsPageInner() {
                 </button>
               </div>
             )}
-
           </div>
-
         </div>
-
       </div>
     </div>
   );
@@ -303,11 +348,13 @@ function AllProductsPageInner() {
 
 export default function AllProductsPage() {
   return (
-    <Suspense fallback={
-      <div className="w-full min-h-screen bg-white flex items-center justify-center text-black">
-        <p className="text-sm font-semibold">Loading Collection...</p>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="w-full min-h-screen bg-white flex items-center justify-center text-black">
+          <p className="text-sm font-semibold">Loading Collection...</p>
+        </div>
+      }
+    >
       <AllProductsPageInner />
     </Suspense>
   );
