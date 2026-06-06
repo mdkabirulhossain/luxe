@@ -1,13 +1,13 @@
 // app/(main)/page.tsx
 import React from 'react';
-import HeroBanner from '@/components/HeroBanner';
-import FlashSalesSection from '@/components/FlashSales/FlashSalesSection';
+import HeroBanner from '@/app/(main)/_components/HeroBanner';
+import FlashSalesSection from '@/app/(main)/_components/FlashSales/FlashSalesSection';
 import Sidebar from '@/components/sidebar';
-import BrowseByCategory from '@/components/BrowseByCategory';
-import BestSellingProducts from '@/components/BestSellingProducts';
-import ExploreOurProducts from '@/components/ExploreOurProducts';
-import NewArrival from '@/components/NewArrival';
-import FeaturesSection from '@/components/FeaturesSection';
+import BrowseByCategory from '@/app/(main)/_components/BrowseByCategory';
+import BestSellingProducts from '@/app/(main)/_components/BestSellingProducts';
+import ExploreOurProducts from '@/app/(main)/_components/ExploreOurProducts';
+import NewArrival from '@/app/(main)/_components/NewArrival';
+import FeaturesSection from '@/app/(main)/_components/FeaturesSection';
 
 export default function Home() {
   return (

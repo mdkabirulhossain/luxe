@@ -5,7 +5,7 @@ import Link from 'next/link';
 import OurStory from '@/app/(main)/about/_components/OurStory';
 import StatsSection from '@/app/(main)/about/_components/StatsSection';
 import TeamSlider from '@/app/(main)/about/_components/TeamSlider';
-import FeaturesSection from '@/components/FeaturesSection';
+import FeaturesSection from '@/app/(main)/_components/FeaturesSection';
 
 
 export default function AboutPage() {
