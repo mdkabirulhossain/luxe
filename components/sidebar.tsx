@@ -77,18 +77,26 @@ interface SidebarProps {
   activeCategory?: string;
   activeSubcategory?: string;
   onSelect?: (category: string, subcategory?: string) => void;
+  isDropdown?: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
   activeCategory = "",
   activeSubcategory = "",
   onSelect,
+  isDropdown = false,
 }) => {
   const router = useRouter();
 
-  // Hover states for desktop flyout menu
-  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
-  const [hoveredSubcategory, setHoveredSubcategory] = useState<string | null>(null);
+  // Hover states for desktop flyout menu. Default to active selections so they are shown open.
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(activeCategory || null);
+  const [hoveredSubcategory, setHoveredSubcategory] = useState<string | null>(activeSubcategory || null);
+
+  // Sync state if active category/subcategory props change from parents
+  useEffect(() => {
+    setHoveredCategory(activeCategory || null);
+    setHoveredSubcategory(activeSubcategory || null);
+  }, [activeCategory, activeSubcategory]);
 
   // Ref to hold a timer to close the flyout after a short delay (debounces mouse transition)
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -116,9 +124,10 @@ const Sidebar: React.FC<SidebarProps> = ({
   };
 
   const handleMouseLeaveSidebar = () => {
+    // Revert back to displaying the currently active selections instead of closing completely
     closeTimeoutRef.current = setTimeout(() => {
-      setHoveredCategory(null);
-      setHoveredSubcategory(null);
+      setHoveredCategory(activeCategory || null);
+      setHoveredSubcategory(activeSubcategory || null);
     }, 180);
   };
 
@@ -130,8 +139,6 @@ const Sidebar: React.FC<SidebarProps> = ({
   }, []);
 
   const handleSelect = (category: string, subcategory?: string) => {
-    setHoveredCategory(null);
-    setHoveredSubcategory(null);
 
     if (onSelect) {
       onSelect(category, subcategory);
@@ -157,7 +164,11 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <div
       onMouseLeave={handleMouseLeaveSidebar}
-      className="relative w-full lg:w-64 lg:border-r lg:border-gray-200 lg:pt-2 lg:pr-4 shrink-0 flex flex-col z-30"
+      className={`relative w-full lg:w-64 shrink-0 flex flex-col z-30 ${
+        isDropdown
+          ? "lg:border-none lg:pt-0 lg:pr-0"
+          : "lg:border-r lg:border-gray-200 lg:pt-2 lg:pr-4"
+      }`}
     >
       {/* ── MOBILE & TABLET CATEGORIES ── */}
       <div className="w-full lg:hidden py-4 border-b border-b-gray-100 bg-white sticky top-20 z-20 overflow-visible">
@@ -217,9 +228,8 @@ const Sidebar: React.FC<SidebarProps> = ({
         )}
       </div>
 
-      {/* ── DESKTOP SIDEBAR ── */}
       <aside className="hidden lg:block w-full">
-        <ul className="flex flex-col">
+        <ul className={`flex flex-col ${isDropdown ? "py-4 px-4" : ""}`}>
           {sidebarCategories.map((cat, idx) => {
             const isActive = activeCategory === cat.name;
             const isHovered = hoveredCategory === cat.name;
@@ -270,11 +280,11 @@ const Sidebar: React.FC<SidebarProps> = ({
       {hoveredCategory && activeCatData?.subOptions && activeCatData.subOptions.length > 0 && (
         <div
           onMouseEnter={handleMouseEnterFlyout}
-          className="absolute left-[calc(100%-1px)] top-0 z-[100] flex shadow-[0_10px_35px_rgba(0,0,0,0.08)] border border-gray-100 bg-white rounded-r-md overflow-hidden animate-fadeIn"
+          className="absolute left-[calc(100%-1px)] top-0 z-[100] flex shadow-[0_10px_35px_rgba(0,0,0,0.08)] border border-gray-200 bg-white rounded-r-md overflow-hidden animate-fadeIn"
           style={{ minHeight: "380px" }}
         >
           {/* Column 2: Subcategories */}
-          <div className="w-56 py-3 px-2 border-r border-gray-100 flex flex-col bg-white shrink-0">
+          <div className="w-56 py-4 px-2 border-r border-gray-100 flex flex-col bg-white shrink-0">
             {activeCatData.subOptions.map((sub) => {
               const hasSubSub = sub.subOptions && sub.subOptions.length > 0;
               const isSubHovered = hoveredSubcategory === sub.name;
@@ -320,7 +330,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
           {/* Column 3: Sub-subcategories */}
           {hoveredSubcategory && activeSubData?.subOptions && activeSubData.subOptions.length > 0 && (
-            <div className="w-56 py-3 px-2 flex flex-col bg-white shrink-0 animate-fadeIn">
+            <div className="w-56 py-4 px-2 flex flex-col bg-white shrink-0 animate-fadeIn">
               {activeSubData.subOptions.map((subSub) => {
                 const isSubSubActive =
                   activeCategory === hoveredCategory && activeSubcategory === subSub;
