@@ -3,8 +3,8 @@
 import React from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SliderStatCards } from "@/app/(dashboard)/dashboard/heroSlider/_components/StatCards";
-import { SliderSequencingList } from "@/app/(dashboard)/dashboard/heroSlider/_components/SequencingList";
+import { SliderStatCards } from "@/app/dashboard/heroSlider/_components/StatCards";
+import { SliderSequencingList } from "@/app/dashboard/heroSlider/_components/SequencingList";
 
 
 
