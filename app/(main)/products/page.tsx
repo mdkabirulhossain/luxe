@@ -5,7 +5,7 @@
 import React, { useState, useMemo, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import ProductCard from "@/components/shared/product/ProductCard";
-import Sidebar from "@/components/sidebar";
+import Sidebar, { sidebarCategories } from "@/components/sidebar";
 import { dummyProducts } from "@/lib/products";
 import {
   Select,
@@ -36,7 +36,7 @@ function AllProductsPageInner() {
   // Map DetailedProduct to ProductCardData format with exact category and subcategory tags
   const normalizedProducts = useMemo(() => {
     return dummyProducts.map((p) => {
-      let category = "Electronics";
+      let category = "Computers & Laptops";
       let subcategory = "";
 
       // Precise category and subcategory mappings based on product ID
@@ -44,10 +44,10 @@ function AllProductsPageInner() {
         category = "Men's Fashion";
         subcategory = "Jackets & Coats";
       } else if (p.id === "b2" || p.id === "w1") {
-        category = "Woman's Fashion";
+        category = "Women's Fashion";
         subcategory = "Handbags";
       } else if (p.id === "ep8" || p.id === "w4") {
-        category = "Woman's Fashion";
+        category = "Women's Fashion";
         subcategory = "Jackets & Coats";
       } else if (p.id === "ep6") {
         category = "Men's Fashion";
@@ -58,29 +58,31 @@ function AllProductsPageInner() {
         p.id === "w3" ||
         p.id === "ep7"
       ) {
-        category = "Electronics"; // Gamepads
+        category = "Computers & Laptops"; // Gamepads
       } else if (p.id === "2" || p.id === "j4") {
-        category = "Electronics"; // Keyboards
+        category = "Computers & Laptops"; // Keyboards
       } else if (p.id === "3" || p.id === "j2") {
-        category = "Electronics"; // Monitors
+        category = "Computers & Laptops"; // Monitors
       } else if (p.id === "5") {
-        category = "Electronics"; // Mice
+        category = "Computers & Laptops"; // Mice
       } else if (p.id === "6") {
-        category = "Electronics"; // Headsets
+        category = "Computers & Laptops"; // Headsets
       } else if (p.id === "b3" || p.id === "b4" || p.id === "w2") {
-        category = "Electronics"; // Coolers
+        category = "Computers & Laptops"; // Coolers
       } else if (p.id === "ep2") {
-        category = "Electronics"; // Camera
+        category = "Mobiles & Cameras"; // Camera
       } else if (p.id === "ep3" || p.id === "j1") {
-        category = "Electronics"; // Laptop
+        category = "Computers & Laptops"; // Laptop
       } else if (p.id === "ep1") {
-        category = "Groceries & Pets";
+        category = "Groceries & Essentials";
+        subcategory = "Cooking Ingredients";
       } else if (p.id === "ep4") {
         category = "Health & Beauty";
+        subcategory = "Skincare";
       } else if (p.id === "ep5") {
-        category = "Baby's & Toys";
+        category = "Toys & Games";
       } else if (p.id === "4") {
-        category = "Home & Lifestyle";
+        category = "Home & Living";
       }
 
       // Calculate discount percentage if originalPrice exists
@@ -124,7 +126,17 @@ function AllProductsPageInner() {
 
     // 3. Subcategory Filter
     if (selectedSubcategory !== "") {
-      result = result.filter((p) => p.subcategory === selectedSubcategory);
+      // Find if this selectedSubcategory has any sub-suboptions in our sidebar categories
+      let matchingSubcategories = [selectedSubcategory];
+      for (const cat of sidebarCategories) {
+        if (cat.subOptions) {
+          const sub = cat.subOptions.find((s) => s.name === selectedSubcategory);
+          if (sub && sub.subOptions) {
+            matchingSubcategories = [...matchingSubcategories, ...sub.subOptions];
+          }
+        }
+      }
+      result = result.filter((p) => matchingSubcategories.includes(p.subcategory));
     }
 
     // 4. Sorting
@@ -192,7 +204,7 @@ function AllProductsPageInner() {
           {/* Left sidebar container */}
           <div className="w-full lg:w-64 shrink-0">
             {/* Left Navbar / Categories Sidebar */}
-            <div className="bg-white lg:sticky lg:top-8">
+            <div className="bg-white lg:sticky lg:top-24 z-30">
               <h2 className="text-lg font-bold text-black border-b border-gray-100 pb-4 mb-4 hidden lg:block uppercase tracking-wider">
                 Categories
               </h2>
