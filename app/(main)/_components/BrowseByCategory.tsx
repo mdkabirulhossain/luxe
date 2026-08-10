@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface CategoryItem {
   id: string;
@@ -11,6 +12,89 @@ interface CategoryItem {
 }
 
 const categoriesData: CategoryItem[] = [
+  {
+    id: 'womans-fashion',
+    name: "Woman's Fashion",
+    icon: (
+      <svg className="w-8 h-8 sm:w-14 sm:h-14" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4a2 2 0 11-4 0h4zm-4 0a2 2 0 00-2 2v2.586a1 1 0 01-.293.707l-2.414 2.414a1 1 0 00-.293.707V19a2 2 0 002 2h12a2 2 0 002-2v-6.586a1 1 0 00-.293-.707l-2.414-2.414a1 1 0 01-.293-.707V6a2 2 0 00-2-2" />
+      </svg>
+    ),
+  },
+  {
+    id: 'mens-fashion',
+    name: "Men's Fashion",
+    icon: (
+      <svg className="w-8 h-8 sm:w-14 sm:h-14" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 4h12l4 4-2 7h-3v5H7v-5H4l-2-7 4-4z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16M9 7l3 3 3-3" />
+      </svg>
+    ),
+  },
+  {
+    id: 'electronics',
+    name: 'Electronics',
+    icon: (
+      <svg className="w-8 h-8 sm:w-14 sm:h-14" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 3h6M4 7h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V9a2 2 0 012-2zM9 21v-4m6 4v-4M5 12h14" />
+      </svg>
+    ),
+  },
+  {
+    id: 'home-lifestyle',
+    name: 'Home & Lifestyle',
+    icon: (
+      <svg className="w-8 h-8 sm:w-14 sm:h-14" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg>
+    ),
+  },
+  {
+    id: 'medicine',
+    name: 'Medicine',
+    icon: (
+      <svg className="w-8 h-8 sm:w-14 sm:h-14" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.5l8-8a4.95 4.95 0 117 7l-8 8a4.95 4.95 0 11-7-7zM9 8l7 7" />
+      </svg>
+    ),
+  },
+  {
+    id: 'sports-outdoor',
+    name: 'Sports & Outdoor',
+    icon: (
+      <svg className="w-8 h-8 sm:w-14 sm:h-14" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" strokeWidth="1.2" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.2" d="M6.2 6.2c2.4 2.4 2.4 6.4 0 8.8M17.8 6.2c-2.4 2.4-2.4 6.4 0 8.8" />
+      </svg>
+    ),
+  },
+  {
+    id: 'babys-toys',
+    name: "Baby's & Toys",
+    icon: (
+      <svg className="w-8 h-8 sm:w-14 sm:h-14" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 10V8a3 3 0 016 0v2m-6 0h6m-6 0v10a2 2 0 002 2h2a2 2 0 002-2V10M12 3v2" />
+      </svg>
+    ),
+  },
+  {
+    id: 'groceries-pets',
+    name: 'Groceries & Pets',
+    icon: (
+      <svg className="w-8 h-8 sm:w-14 sm:h-14" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 9h18M5 9l1.5 11h11L19 9M9 9V6a3 3 0 016 0v3" />
+      </svg>
+    ),
+  },
+  {
+    id: 'health-beauty',
+    name: 'Health & Beauty',
+    icon: (
+      <svg className="w-8 h-8 sm:w-14 sm:h-14" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+      </svg>
+    ),
+  },
   {
     id: 'phones',
     name: 'Phones',
@@ -81,8 +165,9 @@ const categoriesData: CategoryItem[] = [
 ];
 
 const BrowseByCategory: React.FC = () => {
+  const router = useRouter();
   const scrollRef = useRef<HTMLDivElement>(null);
-  // Default selection to 'Camera' to precisely replicate your uploaded design state
+  // Default selection to 'camera' to precisely replicate design state
   const [activeId, setActiveId] = useState<string>('camera');
 
   // ONE BY ONE SCROLL CALCULATOR
@@ -104,6 +189,29 @@ const BrowseByCategory: React.FC = () => {
     }
   };
 
+  const handleCategoryClick = (category: CategoryItem) => {
+    setActiveId(category.id);
+    
+    // Map specific subcategories to their correct parent categories in the database
+    let targetCategory = category.name;
+    let subcategory = "";
+
+    if (['Phones', 'Computers', 'SmartWatch', 'Camera', 'HeadPhones', 'Gaming', 'Accessories'].includes(category.name)) {
+      targetCategory = 'Electronics';
+      if (category.name === 'Camera') {
+        subcategory = 'Camera';
+      } else if (category.name === 'Computers') {
+        subcategory = 'Laptop';
+      }
+    }
+
+    let url = `/products?category=${encodeURIComponent(targetCategory)}`;
+    if (subcategory) {
+      url += `&sub=${encodeURIComponent(subcategory)}`;
+    }
+    router.push(url);
+  };
+
   return (
     <section className="w-full pt-16 border-b border-gray-200 pb-16 bg-white">
       {/* Red category header accent block */}
@@ -122,7 +230,7 @@ const BrowseByCategory: React.FC = () => {
         <div className="flex items-center gap-2">
           <button 
             onClick={() => scroll('left')}
-            className="bg-gray-100 p-3 rounded-full hover:bg-gray-200 text-black transition-colors"
+            className="bg-gray-100 p-3 rounded-full hover:bg-gray-200 text-black transition-colors cursor-pointer"
             aria-label="Scroll left"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -131,7 +239,7 @@ const BrowseByCategory: React.FC = () => {
           </button>
           <button 
             onClick={() => scroll('right')}
-            className="bg-gray-100 p-3 rounded-full hover:bg-gray-200 text-black transition-colors"
+            className="bg-gray-100 p-3 rounded-full hover:bg-gray-200 text-black transition-colors cursor-pointer"
             aria-label="Scroll right"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -152,7 +260,7 @@ const BrowseByCategory: React.FC = () => {
           return (
             <div 
               key={category.id} 
-              onClick={() => setActiveId(category.id)}
+              onClick={() => handleCategoryClick(category)}
               className={`snap-start shrink-0 w-25 h-25 sm:w-42.5 sm:h-36.25 border rounded-sm flex flex-col items-center justify-center gap-2 sm:gap-4 cursor-pointer transition-all duration-200 group select-none ${
                 isActive 
                   ? 'bg-red-500 border-red-500 text-white' 

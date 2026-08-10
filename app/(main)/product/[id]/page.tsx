@@ -3,9 +3,9 @@
 
 import React from "react";
 import { useParams } from "next/navigation";
-import ProductGallery from "@/components/product  /ProductGallery";
-import ProductInfoPanel from "@/components/product  /ProductInfoPanel";
-import RelatedItemsList from "@/components/product  /RelatedItemsList";
+import ProductGallery from "@/components/product/ProductGallery";
+import ProductInfoPanel from "@/components/product/ProductInfoPanel";
+import RelatedItemsList from "@/components/product/RelatedItemsList";
 import { dummyProducts } from "@/lib/products";
 
 export default function ProductDetailPage() {

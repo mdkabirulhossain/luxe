@@ -70,7 +70,7 @@ const HeroBanner: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 bg-neutral-950 text-white mt-4 lg:mt-10 ml-0 lg:ml-11 relative overflow-hidden rounded-sm aspect-892/380 min-h-85 sm:min-h-95 select-none shadow-sm">
+    <div className="w-full bg-neutral-950 text-white mt-4 lg:mt-10 relative overflow-hidden rounded-sm aspect-[892/380] min-h-85 sm:min-h-95 select-none shadow-sm">
 
       {/* ── Slides Viewport Track ── */}
       {MOCK_SLIDES.map((slide, idx) => {
