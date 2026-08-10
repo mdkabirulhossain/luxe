@@ -172,7 +172,7 @@ function AllProductsPageInner() {
   };
 
   return (
-    <div className="bg-white min-h-screen py-12 px-4 md:px-8 lg:px-16 font-sans select-none">
+    <div className="bg-transparent min-h-screen py-12 px-4 md:px-8 lg:px-16 font-sans select-none">
       <div className="max-w-7xl mx-auto space-y-10">
         {/* Breadcrumbs Header */}
         <nav className="flex items-center gap-2 text-xs text-gray-400 font-medium select-none">
@@ -348,7 +348,7 @@ function AllProductsPageInner() {
                 </div>
                 <button
                   onClick={handleResetFilters}
-                  className="bg-[#DB4444] hover:bg-red-600 text-white text-xs font-semibold px-6 py-3 rounded cursor-pointer transition-colors"
+                  className="bg-[#204E42] hover:bg-[#1a4036] text-white text-xs font-semibold px-6 py-3 rounded cursor-pointer transition-colors"
                 >
                   Reset Filters
                 </button>

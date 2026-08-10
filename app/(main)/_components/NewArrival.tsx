@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const NewArrival: React.FC = () => {
   return (
-    <section className="w-full pt-16 pb-16 bg-white">
+    <section className="w-full pt-16 pb-16 bg-transparent">
       {/* Red category accent block */}
       <div className="flex items-center gap-4 mb-5">
         <div className="w-5 h-10 bg-red-500 rounded-sm"></div>
@@ -12,7 +12,7 @@ const NewArrival: React.FC = () => {
       </div>
 
       {/* Primary Section Title */}
-      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-wide text-black mb-14">
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-wide text-primary mb-14">
         New Arrival
       </h2>
 

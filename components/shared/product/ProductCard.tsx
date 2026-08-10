@@ -140,15 +140,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const containerClassName = "group relative flex flex-col w-full max-w-[270px] mx-auto select-none";
 
   // Global gray card background definition matching the UI layout precisely
-  const imageAreaClassName = "relative w-full aspect-[270/250] bg-[#F5F5F5] flex items-center justify-center rounded overflow-hidden p-4 cursor-pointer";
+  const imageAreaClassName = "relative w-full aspect-[270/250] bg-[#EFEFEA] flex items-center justify-center rounded overflow-hidden p-4 cursor-pointer";
 
   // Global uniform badge classes matching styling variations
-  const discountBadgeClassName = "absolute top-3 left-3 bg-[#DB4444] text-white font-normal text-xs px-2.5 py-1 rounded-sm z-10";
+  const discountBadgeClassName = "absolute top-3 left-3 bg-[#204E42] text-white font-normal text-xs px-2.5 py-1 rounded-sm z-10";
   const newBadgeClassName = "absolute top-3 left-3 bg-[#00FF66] text-black font-medium text-xs px-2.5 py-1 rounded-sm uppercase tracking-wider z-10";
 
   // Core typography rules
   const titleClassName = "text-base font-medium text-black line-clamp-1 cursor-pointer hover:underline tracking-wide";
-  const currentPriceClassName = "text-[#DB4444] font-medium text-base";
+  const currentPriceClassName = "text-[#204E42] font-medium text-base";
   const originalPriceClassName = "text-gray-400 font-normal line-through text-base";
 
   // Harmonized warm amber-orange star color profile matching your references

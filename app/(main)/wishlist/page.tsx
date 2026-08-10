@@ -73,7 +73,7 @@ const WishlistPage: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white min-h-screen py-12 px-4 md:px-8 lg:px-16 font-sans select-none">
+    <div className="bg-transparent min-h-screen py-12 px-4 md:px-8 lg:px-16 font-sans select-none">
       <div className="max-w-7xl mx-auto space-y-20">
         
         {/* SECTION 1: Wishlist Container */}
@@ -98,7 +98,7 @@ const WishlistPage: React.FC = () => {
         <div>
           <div className="flex items-center justify-between mb-10">
             <div className="flex items-center gap-4">
-              <span className="w-5 h-10 bg-[#DB4444] rounded-sm block" />
+              <span className="w-5 h-10 bg-primary rounded-sm block" />
               <h2 className="text-xl md:text-2xl font-normal text-black tracking-wide">
                 Just For You
               </h2>

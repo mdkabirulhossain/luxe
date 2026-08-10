@@ -19,7 +19,7 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen py-10 md:py-20 px-4 md:px-8 lg:px-16 font-sans">
+    <div className="bg-transparent min-h-screen py-10 md:py-20 px-4 md:px-8 lg:px-16 font-sans">
       <div className="max-w-7xl mx-auto">
         
         {/* Breadcrumb Navigation */}
@@ -38,7 +38,7 @@ const ContactPage: React.FC = () => {
             {/* Top Sub-section: Call To Us */}
             <div className="flex flex-col space-y-4">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-[#DB4444] flex items-center justify-center text-white shrink-0">
+                <div className="w-10 h-10 rounded-full bg-[#204E42] flex items-center justify-center text-white shrink-0">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
@@ -57,7 +57,7 @@ const ContactPage: React.FC = () => {
             {/* Bottom Sub-section: Write To Us */}
             <div className="flex flex-col space-y-4">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-[#DB4444] flex items-center justify-center text-white shrink-0">
+                <div className="w-10 h-10 rounded-full bg-[#204E42] flex items-center justify-center text-white shrink-0">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
@@ -96,7 +96,7 @@ const ContactPage: React.FC = () => {
                   htmlFor="name"
                   className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-gray-400 pointer-events-none transition-all peer-placeholder-shown:block peer-focus:hidden hidden items-center gap-0.5"
                 >
-                  Your Name <span className="text-[#DB4444]">*</span>
+                  Your Name <span className="text-[#204E42]">*</span>
                 </label>
               </div>
 
@@ -115,7 +115,7 @@ const ContactPage: React.FC = () => {
                   htmlFor="email"
                   className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-gray-400 pointer-events-none transition-all peer-placeholder-shown:block peer-focus:hidden hidden items-center gap-0.5"
                 >
-                  Your Email <span className="text-[#DB4444]">*</span>
+                  Your Email <span className="text-[#204E42]">*</span>
                 </label>
               </div>
 
@@ -134,7 +134,7 @@ const ContactPage: React.FC = () => {
                   htmlFor="phone"
                   className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-gray-400 pointer-events-none transition-all peer-placeholder-shown:block peer-focus:hidden hidden items-center gap-0.5"
                 >
-                  Your Phone <span className="text-[#DB4444]">*</span>
+                  Your Phone <span className="text-[#204E42]">*</span>
                 </label>
               </div>
 
@@ -154,7 +154,7 @@ const ContactPage: React.FC = () => {
             <div className="flex justify-end pt-2">
               <button
                 type="submit"
-                className="w-full sm:w-auto bg-[#DB4444] text-white font-medium text-sm md:text-base rounded px-12 py-4 hover:bg-[#c23b3b] active:scale-[0.99] transition-all"
+                className="w-full sm:w-auto bg-[#204E42] text-white font-medium text-sm md:text-base rounded px-12 py-4 hover:bg-[#1a4036] active:scale-[0.99] transition-all"
               >
                 Send Message
               </button>

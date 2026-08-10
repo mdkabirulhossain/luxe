@@ -80,7 +80,7 @@ const Navbar: React.FC = () => {
           </button>
 
           {/* Logo Branding */}
-          <Link href="/" className="text-xl sm:text-2xl font-bold tracking-wide cursor-pointer text-black selection:bg-red-500 mr-2">
+          <Link href="/" className="text-xl sm:text-2xl font-bold tracking-wide cursor-pointer text-primary selection:bg-accent mr-2">
             Luxe
           </Link>
         </div>

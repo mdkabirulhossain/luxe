@@ -51,8 +51,8 @@ export default function RelatedItemsList() {
     <div className="w-full pt-16">
       {/* Section Decorative Tag */}
       <div className="flex items-center gap-4 mb-8 select-none">
-        <div className="w-5 h-10 bg-[#DB4444] rounded-sm"></div>
-        <span className="text-[#DB4444] font-semibold text-sm">Related Item</span>
+        <div className="w-5 h-10 bg-primary rounded-sm"></div>
+        <span className="text-primary font-semibold text-sm">Related Item</span>
       </div>
 
       {/* Grid Content List */}

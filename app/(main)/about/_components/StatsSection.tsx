@@ -11,7 +11,7 @@ const StatCard: React.FC<StatCardProps> = ({ icon, value, label, isActive }) => 
   return (
     <div className={`border rounded p-6 flex flex-col items-center justify-center text-center transition-all duration-300 ${
       isActive 
-        ? 'bg-[#DB4444] border-[#DB4444] text-white shadow-lg' 
+        ? 'bg-primary border-primary text-white shadow-lg' 
         : 'bg-white border-gray-200 text-black hover:border-gray-400'
     }`}>
       {/* Outer circular badge frame wrapper */}

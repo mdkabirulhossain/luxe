@@ -91,7 +91,7 @@ export default function ProductInfoPanel({ product }: ProductInfoPanelProps) {
                 onClick={() => setSelectedSize(size)}
                 className={`px-3 h-8 rounded text-xs font-semibold border transition-colors cursor-pointer ${
                   selectedSize === size
-                    ? "bg-[#DB4444] text-white border-[#DB4444]"
+                    ? "bg-[#204E42] text-white border-[#204E42]"
                     : "bg-white text-black border-gray-300 hover:border-black"
                 }`}
               >
@@ -114,13 +114,13 @@ export default function ProductInfoPanel({ product }: ProductInfoPanelProps) {
           <div className="w-12 text-center font-semibold text-sm">{quantity}</div>
           <button
             onClick={() => setQuantity(quantity + 1)}
-            className="px-3 bg-[#DB4444] text-white text-xl font-medium h-full hover:bg-red-600 cursor-pointer"
+            className="px-3 bg-[#204E42] text-white text-xl font-medium h-full hover:bg-[#1a4036] cursor-pointer"
           >
             +
           </button>
         </div>
 
-        <button className="flex-1 bg-[#DB4444] hover:bg-red-600 text-white text-sm font-medium h-11 rounded transition-colors cursor-pointer">
+        <button className="flex-1 bg-[#204E42] hover:bg-[#1a4036] text-white text-sm font-medium h-11 rounded transition-colors cursor-pointer">
           Buy Now
         </button>
 

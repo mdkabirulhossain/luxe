@@ -56,7 +56,7 @@ const FlashSalesSection: React.FC = () => {
       {/* Row Header wrapper */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
         <div className="flex flex-col md:flex-row md:items-end gap-8 lg:gap-20">
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-wide text-black">
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-wide text-primary">
             Flash Sales
           </h2>
           <CountdownTimer />

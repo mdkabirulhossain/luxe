@@ -53,7 +53,7 @@ const CartPage: React.FC = () => {
   const total = subtotal;
 
   return (
-    <main className="w-full min-h-screen bg-white text-black font-sans py-10 px-4 md:px-8 selection:bg-red-500">
+    <main className="w-full min-h-screen bg-transparent text-black font-sans py-10 px-4 md:px-8 selection:bg-primary">
       <div className="max-w-7xl mx-auto space-y-14">
         
         {/* Breadcrumbs Navigation Stack Layout Section */}
@@ -86,7 +86,7 @@ const CartPage: React.FC = () => {
                   {/* Absolute positioning close button layout indicator overlay element */}
                   <button 
                     onClick={() => removeItem(item.id)}
-                    className="absolute -top-2 -left-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] shadow-md opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity z-10"
+                    className="absolute -top-2 -left-2 bg-primary text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] shadow-md opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity z-10"
                     aria-label={`Remove ${item.name}`}
                   >
                     ✕
@@ -176,7 +176,7 @@ const CartPage: React.FC = () => {
             />
             <button 
               type="button"
-              className="bg-red-500 hover:bg-red-600 text-white font-medium text-sm sm:text-base px-10 py-4 rounded-sm transition-colors whitespace-nowrap active:scale-99"
+              className="bg-primary hover:bg-[#1a4036] text-white font-medium text-sm sm:text-base px-10 py-4 rounded-sm transition-colors whitespace-nowrap active:scale-99"
             >
               Apply Coupon
             </button>
@@ -206,7 +206,7 @@ const CartPage: React.FC = () => {
             <div className="w-full flex justify-center pt-2">
               <Link 
                 href="/checkout"
-                className="bg-red-500 hover:bg-red-600 text-white font-medium text-sm sm:text-base py-4 px-12 rounded-sm transition-colors text-center block w-full max-w-fit"
+                className="bg-primary hover:bg-[#1a4036] text-white font-medium text-sm sm:text-base py-4 px-12 rounded-sm transition-colors text-center block w-full max-w-fit"
               >
                 Procees to checkout
               </Link>

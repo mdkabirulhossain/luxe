@@ -5,7 +5,7 @@ import React from 'react';
 
 const TopHeader: React.FC = () => {
   return (
-    <div className="w-full bg-black text-white py-3 px-4 md:px-8">
+    <div className="w-full bg-primary text-white py-3 px-4 md:px-8">
       <div className="max-w-7xl mx-auto flex justify-between items-center gap-4">
         
         {/* Left Spacer: Hidden on mobile to center content perfectly on desktop */}

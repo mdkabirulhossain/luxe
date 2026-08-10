@@ -181,7 +181,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 onClick={() => handleSelect(cat.name)}
                 className={`text-sm px-4 py-2 rounded-full font-medium transition-colors flex items-center gap-1 cursor-pointer ${
                   isActive
-                    ? "bg-[#DB4444] text-white"
+                    ? "bg-[#204E42] text-white"
                     : "bg-gray-100 hover:bg-gray-200 text-black"
                 }`}
               >
@@ -245,8 +245,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                 <div
                   className={`flex justify-between items-center text-[14px] cursor-pointer py-3.5 pr-2 transition-all font-normal ${
                     isHovered || isActive
-                      ? "text-[#DB4444]"
-                      : "text-gray-800 hover:text-[#DB4444]"
+                      ? "text-[#204E42]"
+                      : "text-gray-800 hover:text-[#204E42]"
                   }`}
                 >
                   <span>{cat.name}</span>
@@ -254,8 +254,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                     <svg
                       className={`w-3.5 h-3.5 transition-colors duration-200 ${
                         isHovered || isActive
-                          ? "text-[#DB4444]"
-                          : "text-gray-400 group-hover:text-[#DB4444]"
+                          ? "text-[#204E42]"
+                          : "text-gray-400 group-hover:text-[#204E42]"
                       }`}
                       fill="none"
                       stroke="currentColor"
@@ -301,15 +301,15 @@ const Sidebar: React.FC<SidebarProps> = ({
                   }}
                   className={`flex justify-between items-center text-[14px] cursor-pointer py-3.5 px-3 border-b border-gray-50 last:border-0 transition-all font-normal ${
                     isSubHovered || isSubActive
-                      ? "text-[#DB4444]"
-                      : "text-gray-700 hover:text-[#DB4444]"
+                      ? "text-[#204E42]"
+                      : "text-gray-700 hover:text-[#204E42]"
                   }`}
                 >
                   <span>{sub.name}</span>
                   {hasSubSub && (
                     <svg
                       className={`w-3.5 h-3.5 transition-colors duration-200 ${
-                        isSubHovered ? "text-[#DB4444]" : "text-gray-400"
+                        isSubHovered ? "text-[#204E42]" : "text-gray-400"
                       }`}
                       fill="none"
                       stroke="currentColor"
@@ -344,8 +344,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                     }}
                     className={`text-[14px] cursor-pointer py-3.5 px-3 border-b border-gray-50 last:border-0 transition-all font-normal ${
                       isSubSubActive
-                        ? "text-[#DB4444]"
-                        : "text-gray-600 hover:text-[#DB4444]"
+                        ? "text-[#204E42]"
+                        : "text-gray-600 hover:text-[#204E42]"
                     }`}
                   >
                     {subSub}

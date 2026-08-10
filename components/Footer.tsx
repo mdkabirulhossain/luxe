@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-black text-white pt-20 pb-6 font-sans">
+    <footer className="w-full bg-[#242A27] text-white pt-20 pb-6 font-sans">
       {/* Upper Footer Links Section */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 lg:gap-6 pb-16 border-b border-gray-800">
         
@@ -20,11 +20,11 @@ const Footer: React.FC = () => {
           <p className="text-sm text-gray-300 font-light">Get 10% off your first order</p>
           
           {/* Email Input Field */}
-          <div className="relative max-w-60 border-2 border-white rounded-sm overflow-hidden bg-black">
+          <div className="relative max-w-60 border-2 border-white rounded-sm overflow-hidden bg-[#242A27]">
             <input 
               type="email" 
               placeholder="Enter your email" 
-              className="w-full bg-black text-sm text-gray-400 pl-4 pr-10 py-3 focus:outline-none placeholder-gray-600"
+              className="w-full bg-[#242A27] text-sm text-gray-400 pl-4 pr-10 py-3 focus:outline-none placeholder-gray-600"
             />
             <button 
               className="absolute right-3 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors"

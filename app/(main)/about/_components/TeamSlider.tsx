@@ -83,7 +83,7 @@ const TeamSlider: React.FC = () => {
         <span className="w-3 h-3 rounded-full bg-gray-300 cursor-pointer" />
         <span className="w-3 h-3 rounded-full bg-gray-300 cursor-pointer" />
         {/* Core focused step element indicator matched to layout model design spec */}
-        <span className="w-3 h-3 rounded-full bg-[#DB4444] ring-2 ring-offset-2 ring-gray-400 cursor-pointer" />
+        <span className="w-3 h-3 rounded-full bg-primary ring-2 ring-offset-2 ring-gray-400 cursor-pointer" />
         <span className="w-3 h-3 rounded-full bg-gray-300 cursor-pointer" />
         <span className="w-3 h-3 rounded-full bg-gray-300 cursor-pointer" />
       </div>

@@ -15,7 +15,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full min-h-screen flex flex-col bg-white text-black antialiased">
+    <div className="w-full min-h-screen flex flex-col bg-background text-foreground antialiased">
       {/* Persists on every nested page inside the (main) group */}
       <TopHeader />
       <Navbar />

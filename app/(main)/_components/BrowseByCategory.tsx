@@ -213,7 +213,7 @@ const BrowseByCategory: React.FC = () => {
   };
 
   return (
-    <section className="w-full pt-16 border-b border-gray-200 pb-16 bg-white">
+    <section className="w-full pt-16 border-b border-gray-200 pb-16 bg-transparent">
       {/* Red category header accent block */}
       <div className="flex items-center gap-4 mb-5">
         <div className="w-5 h-10 bg-red-500 rounded-sm"></div>
@@ -222,7 +222,7 @@ const BrowseByCategory: React.FC = () => {
 
       {/* Action header bar row layout */}
       <div className="flex items-center justify-between gap-4 mb-10">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-wide text-black">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-wide text-primary">
           Browse By Category
         </h2>
 
@@ -263,13 +263,13 @@ const BrowseByCategory: React.FC = () => {
               onClick={() => handleCategoryClick(category)}
               className={`snap-start shrink-0 w-25 h-25 sm:w-42.5 sm:h-36.25 border rounded-sm flex flex-col items-center justify-center gap-2 sm:gap-4 cursor-pointer transition-all duration-200 group select-none ${
                 isActive 
-                  ? 'bg-red-500 border-red-500 text-white' 
+                  ? 'bg-accent border-accent text-accent-foreground' 
                   : 'bg-white border-gray-200 text-black hover:border-gray-400'
               }`}
             >
               {/* Icon Container with adaptive stroke thickness context */}
               <div className={`transition-transform duration-200 group-hover:scale-105 ${
-                isActive ? 'text-white' : 'text-black'
+                isActive ? 'text-accent-foreground' : 'text-black'
               }`}>
                 {category.icon}
               </div>

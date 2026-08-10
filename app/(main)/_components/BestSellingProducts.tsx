@@ -50,7 +50,7 @@ const bestSellingData: ProductCardData[] = [
 
 const BestSellingProducts: React.FC = () => {
   return (
-    <section className="w-full pt-16 pb-16 bg-white">
+    <section className="w-full pt-16 pb-16 bg-transparent">
       {/* Accent Subtitle Header */}
       <div className="flex items-center gap-4 mb-5">
         <div className="w-5 h-10 bg-red-500 rounded-sm"></div>
@@ -59,7 +59,7 @@ const BestSellingProducts: React.FC = () => {
 
       {/* Main Title Heading Actions Row */}
       <div className="flex items-center justify-between gap-4 mb-14">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-wide text-black">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-wide text-primary">
           Best Selling Products
         </h2>
 

@@ -43,7 +43,7 @@ const featuresData: FeatureItem[] = [
 
 const FeaturesSection: React.FC = () => {
   return (
-    <section className="w-full pt-20 pb-20 bg-white flex justify-center items-center">
+    <section className="w-full pt-20 pb-20 bg-transparent flex justify-center items-center">
       {/* 3-Column Responsive Layout Wrapper */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-24 max-w-6xl w-full px-4">
         {featuresData.map((feature) => (
@@ -58,7 +58,7 @@ const FeaturesSection: React.FC = () => {
 
             {/* Content Text Elements */}
             <div className="space-y-2">
-              <h3 className="text-lg font-bold tracking-wider text-black font-sans uppercase">
+              <h3 className="text-lg font-bold tracking-wider text-primary font-sans uppercase">
                 {feature.title}
               </h3>
               <p className="text-sm font-normal text-gray-600">
