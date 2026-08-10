@@ -4,7 +4,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Sidebar from '@/components/sidebar';
 
 const AUTH_KEY = 'luxe_isLoggedIn';
 
@@ -15,18 +14,6 @@ const Navbar: React.FC = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Categories dropdown states & timers
-  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
-  const closeCategoriesTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (closeCategoriesTimerRef.current) {
-        clearTimeout(closeCategoriesTimerRef.current);
-      }
-    };
-  }, []);
-  
   const mobileSearchInputRef = useRef<HTMLInputElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
 
@@ -96,48 +83,6 @@ const Navbar: React.FC = () => {
           <Link href="/" className="text-xl sm:text-2xl font-bold tracking-wide cursor-pointer text-black selection:bg-red-500 mr-2">
             Luxe
           </Link>
-
-          {/* Desktop Categories Dropdown Button */}
-          <div 
-            className="hidden md:block relative py-2"
-            onMouseEnter={() => {
-              if (closeCategoriesTimerRef.current) clearTimeout(closeCategoriesTimerRef.current);
-              setIsCategoriesOpen(true);
-            }}
-            onMouseLeave={() => {
-              closeCategoriesTimerRef.current = setTimeout(() => {
-                setIsCategoriesOpen(false);
-              }, 180);
-            }}
-          >
-            <button className="flex items-center gap-2 font-semibold text-black cursor-pointer py-1.5 hover:text-[#DB4444] transition-colors">
-              <svg className="w-5 h-5 text-black" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-              </svg>
-              <span>Categories</span>
-            </button>
-
-            {isCategoriesOpen && (
-              <div 
-                className="absolute top-[calc(100%-2px)] left-0 bg-white border border-gray-200 shadow-2xl rounded-md z-[999] animate-fadeIn"
-                onMouseEnter={() => {
-                  if (closeCategoriesTimerRef.current) clearTimeout(closeCategoriesTimerRef.current);
-                }}
-                onMouseLeave={() => {
-                  closeCategoriesTimerRef.current = setTimeout(() => {
-                    setIsCategoriesOpen(false);
-                  }, 180);
-                }}
-              >
-                <Sidebar 
-                  isDropdown={true}
-                  onSelect={() => {
-                    setIsCategoriesOpen(false);
-                  }}
-                />
-              </div>
-            )}
-          </div>
         </div>
 
         {/* Center Section: Desktop Navigation Links */}
