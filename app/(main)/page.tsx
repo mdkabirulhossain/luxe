@@ -12,7 +12,11 @@ export default function Home() {
   return (
     <main className="w-full">
       <div className="max-w-7xl mx-auto px-4 md:px-8 pb-12">
+<<<<<<< HEAD
         {/* Responsive Grid Setup */}
+=======
+        {/* Full Width Hero Banner */}
+>>>>>>> e4aa4fc04a3cda3ddf776865c196f67efcc82026
         <div className="w-full">
           <HeroBanner />
         </div>

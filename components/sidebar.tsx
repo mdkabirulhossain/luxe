@@ -2,62 +2,144 @@
 // components/sidebar.tsx
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
-export interface SidebarCategory {
+export interface SubCategory {
   name: string;
   subOptions?: string[];
 }
 
+export interface SidebarCategory {
+  name: string;
+  subOptions?: SubCategory[];
+}
+
 export const sidebarCategories: SidebarCategory[] = [
   {
-    name: "Woman's Fashion",
-    subOptions: ["Dresses", "Tops & Tees", "Jackets & Coats", "Handbags"],
+    name: "Groceries & Essentials",
+    subOptions: [
+      {
+        name: "Baking, Cooking",
+        subOptions: ["Cooking Ingredients", "Home Baking, Sugar", "Condiment Dressing"],
+      },
+      { name: "Laundry, Household" },
+      { name: "Beverages" },
+      { name: "Canned, Dry Packaged Foods" },
+      { name: "Snacks" },
+      { name: "Breakfast" },
+      { name: "Candy Chocolate" },
+      { name: "Cigars Cigarettes" },
+    ],
+  },
+  {
+    name: "Health & Beauty",
+    subOptions: [
+      { name: "Skincare" },
+      { name: "Haircare" },
+      { name: "Makeup" },
+      { name: "Fragrances" },
+    ],
   },
   {
     name: "Men's Fashion",
-    subOptions: ["Shirts & Polos", "Pants & Jeans", "Jackets & Coats", "Watches"],
+    subOptions: [
+      { name: "Shirts & Polos" },
+      { name: "Pants & Jeans" },
+      { name: "Jackets & Coats" },
+      { name: "Watches" },
+    ],
   },
-  { name: "Electronics" },
-  { name: "Home & Lifestyle" },
-  { name: "Medicine" },
-  { name: "Sports & Outdoor" },
-  { name: "Baby's & Toys" },
-  { name: "Groceries & Pets" },
-  { name: "Health & Beauty" },
+  {
+    name: "Women's Fashion",
+    subOptions: [
+      { name: "Dresses" },
+      { name: "Tops & Tees" },
+      { name: "Jackets & Coats" },
+      { name: "Handbags" },
+    ],
+  },
+  { name: "Lifestyle & Tools" },
+  { name: "Mobiles & Cameras" },
+  { name: "TV & Appliances" },
+  { name: "Home & Living" },
+  { name: "Watches & Bags" },
+  { name: "Sports & Outdoors" },
+  { name: "Automotives & Motorbikes" },
+  { name: "Stationary & Crafts" },
+  { name: "Mother & Baby" },
+  { name: "Computers & Laptops" },
+  { name: "Toys & Games" },
+  { name: "Pet Supplies" },
 ];
 
 interface SidebarProps {
   activeCategory?: string;
   activeSubcategory?: string;
   onSelect?: (category: string, subcategory?: string) => void;
+  isDropdown?: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
   activeCategory = "",
   activeSubcategory = "",
   onSelect,
+  isDropdown = false,
 }) => {
   const router = useRouter();
 
-  // Track only ONE active open category name at a time. If another opens, this one closes.
-  const [openCategory, setOpenCategory] = useState<string | null>(null);
+  // Hover states for desktop flyout menu. Default to active selections so they are shown open.
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(activeCategory || null);
+  const [hoveredSubcategory, setHoveredSubcategory] = useState<string | null>(activeSubcategory || null);
 
-  // Automatically expand the active category layout on initial mount or route changes
+  // Sync state if active category/subcategory props change from parents
   useEffect(() => {
-    if (activeCategory) {
-      setOpenCategory(activeCategory);
-    }
-  }, [activeCategory]);
+    setHoveredCategory(activeCategory || null);
+    setHoveredSubcategory(activeSubcategory || null);
+  }, [activeCategory, activeSubcategory]);
 
-  const handleToggleExpand = (catName: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    // If it's already open, close it. Otherwise, set it as the ONLY open category.
-    setOpenCategory((current) => (current === catName ? null : catName));
+  // Ref to hold a timer to close the flyout after a short delay (debounces mouse transition)
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const clearCloseTimeout = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
   };
 
+  const handleMouseEnterCategory = (catName: string) => {
+    clearCloseTimeout();
+    setHoveredCategory(catName);
+    setHoveredSubcategory(null);
+  };
+
+  const handleMouseEnterSubcategory = (subName: string) => {
+    clearCloseTimeout();
+    setHoveredSubcategory(subName);
+  };
+
+  const handleMouseEnterFlyout = () => {
+    clearCloseTimeout();
+  };
+
+  const handleMouseLeaveSidebar = () => {
+    // Revert back to displaying the currently active selections instead of closing completely
+    closeTimeoutRef.current = setTimeout(() => {
+      setHoveredCategory(activeCategory || null);
+      setHoveredSubcategory(activeSubcategory || null);
+    }, 180);
+  };
+
+  // Clear timeout on unmount
+  useEffect(() => {
+    return () => {
+      clearCloseTimeout();
+    };
+  }, []);
+
   const handleSelect = (category: string, subcategory?: string) => {
+
     if (onSelect) {
       onSelect(category, subcategory);
     } else {
@@ -69,13 +151,25 @@ const Sidebar: React.FC<SidebarProps> = ({
     }
   };
 
+  // Derive mobile sub-options
   const selectedCategoryData = sidebarCategories.find(
     (cat) => cat.name === activeCategory
   );
-  const mobileSubOptions = selectedCategoryData?.subOptions;
+  const mobileSubOptions = selectedCategoryData?.subOptions?.map((sub) => sub.name);
+
+  // Selected details for flyout render
+  const activeCatData = sidebarCategories.find((c) => c.name === hoveredCategory);
+  const activeSubData = activeCatData?.subOptions?.find((s) => s.name === hoveredSubcategory);
 
   return (
-    <div className="w-full lg:w-64 lg:border-r lg:border-gray-200 lg:pt-10 lg:pr-8 shrink-0 flex flex-col">
+    <div
+      onMouseLeave={handleMouseLeaveSidebar}
+      className={`relative w-full lg:w-64 shrink-0 flex flex-col z-30 ${
+        isDropdown
+          ? "lg:border-none lg:pt-0 lg:pr-0"
+          : "lg:border-r lg:border-gray-200 lg:pt-2 lg:pr-4"
+      }`}
+    >
       {/* ── MOBILE & TABLET CATEGORIES ── */}
       <div className="w-full lg:hidden py-4 border-b border-b-gray-100 bg-white sticky top-20 z-20 overflow-visible">
         <div className="flex gap-3 overflow-x-auto scrollbar-none px-1 whitespace-nowrap pb-1">
@@ -134,34 +228,34 @@ const Sidebar: React.FC<SidebarProps> = ({
         )}
       </div>
 
-      {/* ── DESKTOP SIDEBAR ── */}
       <aside className="hidden lg:block w-full">
-        <ul className="space-y-4">
+        <ul className={`flex flex-col ${isDropdown ? "py-4 px-4" : ""}`}>
           {sidebarCategories.map((cat, idx) => {
             const isActive = activeCategory === cat.name;
-            const isExpanded = openCategory === cat.name;
-            
+            const isHovered = hoveredCategory === cat.name;
+            const hasSub = cat.subOptions && cat.subOptions.length > 0;
+
             return (
-              <li key={idx} className="relative flex flex-col select-none">
-                {/* Category Header Link */}
+              <li
+                key={idx}
+                onMouseEnter={() => handleMouseEnterCategory(cat.name)}
+                onClick={() => handleSelect(cat.name)}
+                className="relative flex flex-col select-none group border-b border-gray-100/70 last:border-0"
+              >
                 <div
-                  onClick={(e) => {
-                    if (cat.subOptions) {
-                      handleToggleExpand(cat.name, e);
-                    } else {
-                      setOpenCategory(null);
-                      handleSelect(cat.name);
-                    }
-                  }}
-                  className={`flex justify-between items-center text-base cursor-pointer py-1 transition-colors ${
-                    isActive ? "text-[#DB4444] font-medium" : "text-black hover:text-[#DB4444]"
+                  className={`flex justify-between items-center text-[14px] cursor-pointer py-3.5 pr-2 transition-all font-normal ${
+                    isHovered || isActive
+                      ? "text-[#DB4444]"
+                      : "text-gray-800 hover:text-[#DB4444]"
                   }`}
                 >
                   <span>{cat.name}</span>
-                  {cat.subOptions && (
+                  {hasSub && (
                     <svg
-                      className={`w-4 h-4 transition-transform duration-200 ${
-                        isExpanded ? "rotate-90 text-[#DB4444]" : "text-black"
+                      className={`w-3.5 h-3.5 transition-colors duration-200 ${
+                        isHovered || isActive
+                          ? "text-[#DB4444]"
+                          : "text-gray-400 group-hover:text-[#DB4444]"
                       }`}
                       fill="none"
                       stroke="currentColor"
@@ -170,42 +264,98 @@ const Sidebar: React.FC<SidebarProps> = ({
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="2"
+                        strokeWidth="2.5"
                         d="M9 5l7 7-7 7"
                       />
                     </svg>
                   )}
                 </div>
-
-                {/* Vertical Dropdown Overlay Panel (Floats right underneath this specific item) */}
-                {cat.subOptions && isExpanded && (
-                  <ul className="absolute left-0 top-full mt-1 w-full min-w-50 bg-white border border-gray-100 shadow-xl rounded-md py-2.5 px-3 space-y-2 z-50">
-                    {cat.subOptions.map((sub) => {
-                      const isSubActive = activeCategory === cat.name && activeSubcategory === sub;
-                      return (
-                        <li
-                          key={sub}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleSelect(cat.name, sub);
-                          }}
-                          className={`text-sm cursor-pointer py-1 px-2 rounded transition-colors ${
-                            isSubActive
-                              ? "text-[#DB4444] font-medium bg-red-50/60"
-                              : "text-gray-600 hover:text-[#DB4444] hover:bg-gray-50"
-                          }`}
-                        >
-                          {sub}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
               </li>
             );
           })}
         </ul>
       </aside>
+
+      {/* ── DESKTOP MULTI-LEVEL HOVER FLYOUT PANEL ── */}
+      {hoveredCategory && activeCatData?.subOptions && activeCatData.subOptions.length > 0 && (
+        <div
+          onMouseEnter={handleMouseEnterFlyout}
+          className="absolute left-[calc(100%-1px)] top-0 z-[100] flex shadow-[0_10px_35px_rgba(0,0,0,0.08)] border border-gray-200 bg-white rounded-r-md overflow-hidden animate-fadeIn"
+          style={{ minHeight: "380px" }}
+        >
+          {/* Column 2: Subcategories */}
+          <div className="w-56 py-4 px-2 border-r border-gray-100 flex flex-col bg-white shrink-0">
+            {activeCatData.subOptions.map((sub) => {
+              const hasSubSub = sub.subOptions && sub.subOptions.length > 0;
+              const isSubHovered = hoveredSubcategory === sub.name;
+              const isSubActive =
+                activeCategory === hoveredCategory && activeSubcategory === sub.name;
+
+              return (
+                <div
+                  key={sub.name}
+                  onMouseEnter={() => handleMouseEnterSubcategory(sub.name)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSelect(hoveredCategory, sub.name);
+                  }}
+                  className={`flex justify-between items-center text-[14px] cursor-pointer py-3.5 px-3 border-b border-gray-50 last:border-0 transition-all font-normal ${
+                    isSubHovered || isSubActive
+                      ? "text-[#DB4444]"
+                      : "text-gray-700 hover:text-[#DB4444]"
+                  }`}
+                >
+                  <span>{sub.name}</span>
+                  {hasSubSub && (
+                    <svg
+                      className={`w-3.5 h-3.5 transition-colors duration-200 ${
+                        isSubHovered ? "text-[#DB4444]" : "text-gray-400"
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2.5"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Column 3: Sub-subcategories */}
+          {hoveredSubcategory && activeSubData?.subOptions && activeSubData.subOptions.length > 0 && (
+            <div className="w-56 py-4 px-2 flex flex-col bg-white shrink-0 animate-fadeIn">
+              {activeSubData.subOptions.map((subSub) => {
+                const isSubSubActive =
+                  activeCategory === hoveredCategory && activeSubcategory === subSub;
+
+                return (
+                  <div
+                    key={subSub}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSelect(hoveredCategory, subSub);
+                    }}
+                    className={`text-[14px] cursor-pointer py-3.5 px-3 border-b border-gray-50 last:border-0 transition-all font-normal ${
+                      isSubSubActive
+                        ? "text-[#DB4444]"
+                        : "text-gray-600 hover:text-[#DB4444]"
+                    }`}
+                  >
+                    {subSub}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

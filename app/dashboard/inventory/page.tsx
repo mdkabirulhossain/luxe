@@ -2,10 +2,10 @@
 
 import React from "react";
 import { Download, Plus } from "lucide-react";
-import WarehouseLevels from "@/app/(dashboard)/dashboard/inventory/_components/WarehouseLevels";
-import ReorderAlerts from "@/app/(dashboard)/dashboard/inventory/_components/ReorderAlerts";
-import SupplierList from "@/app/(dashboard)/dashboard/inventory/_components/SupplierList";
-import EnvironMetrics from "@/app/(dashboard)/dashboard/inventory/_components/EnvironMetrics";
+import WarehouseLevels from "@/app/dashboard/inventory/_components/WarehouseLevels";
+import ReorderAlerts from "@/app/dashboard/inventory/_components/ReorderAlerts";
+import SupplierList from "@/app/dashboard/inventory/_components/SupplierList";
+import EnvironMetrics from "@/app/dashboard/inventory/_components/EnvironMetrics";
 
 
 export default function InventoryPage() {

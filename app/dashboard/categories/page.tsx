@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { CategoryHeader } from "@/app/(dashboard)/dashboard/categories/_components/CategoryHeader";
-import { CategoryMetrics } from "@/app/(dashboard)/dashboard/categories/_components/CategoryMetrics";
-import { CategoryModal } from "@/app/(dashboard)/dashboard/categories/_components/CategoryModal";
-import { CategorySearch } from "@/app/(dashboard)/dashboard/categories/_components/CategorySearch";
-import { CategoryTable } from "@/app/(dashboard)/dashboard/categories/_components/CategoryTable";
+import { CategoryHeader } from "@/app/dashboard/categories/_components/CategoryHeader";
+import { CategoryMetrics } from "@/app/dashboard/categories/_components/CategoryMetrics";
+import { CategoryModal } from "@/app/dashboard/categories/_components/CategoryModal";
+import { CategorySearch } from "@/app/dashboard/categories/_components/CategorySearch";
+import { CategoryTable } from "@/app/dashboard/categories/_components/CategoryTable";
 import { CategoryItem } from "@/types/category/category.types";
 import { toast } from "sonner"; // Directly imported functional global toaster
 
