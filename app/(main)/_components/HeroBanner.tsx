@@ -9,7 +9,7 @@ const HeroBanner: React.FC = () => {
   return (
     <section className="w-full mt-4 lg:mt-8 select-none" aria-label="Hero Showcase">
       {/* ── Main Hero Card ── */}
-      <div className="relative w-full rounded-2xl overflow-hidden bg-neutral-950 shadow-2xl border border-neutral-800/80 min-h-[540px] sm:min-h-[580px] lg:min-h-[620px] flex items-center">
+      <div className="relative w-full rounded-2xl overflow-hidden bg-neutral-950 shadow-2xl border border-neutral-800/80 min-h-135 sm:min-h-145 lg:min-h-155 flex items-center">
         
         {/* ── Background Image Layer with Luxury Editorial Visual ── */}
         <div className="absolute inset-0 w-full h-full">
@@ -24,10 +24,10 @@ const HeroBanner: React.FC = () => {
           
           {/* Subtle multi-layer gradients for optimal contrast and elegance */}
           {/* Left-to-right gradient for text legibility */}
-          <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/95 via-neutral-950/70 to-neutral-950/20 lg:via-neutral-950/60 lg:to-transparent z-10" />
+          <div className="absolute inset-0 bg-linear-to-r from-neutral-950/95 via-neutral-950/70 to-neutral-950/20 lg:via-neutral-950/60 lg:to-transparent z-10" />
           
           {/* Bottom-to-top gradient for footer badge blend */}
-          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-transparent to-neutral-950/30 z-10" />
+          <div className="absolute inset-0 bg-linear-to-t from-neutral-950/90 via-transparent to-neutral-950/30 z-10" />
         </div>
 
         {/* ── Content Container ── */}
