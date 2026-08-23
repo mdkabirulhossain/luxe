@@ -191,7 +191,7 @@ const BrowseByCategory: React.FC = () => {
 
   const handleCategoryClick = (category: CategoryItem) => {
     setActiveId(category.id);
-    
+
     // Map specific subcategories to their correct parent categories in the database
     let targetCategory = category.name;
     let subcategory = "";
@@ -228,7 +228,7 @@ const BrowseByCategory: React.FC = () => {
 
         {/* Precision Action Arrow Switches */}
         <div className="flex items-center gap-2">
-          <button 
+          <button
             onClick={() => scroll('left')}
             className="bg-gray-100 p-3 rounded-full hover:bg-gray-200 text-black transition-colors cursor-pointer"
             aria-label="Scroll left"
@@ -237,7 +237,7 @@ const BrowseByCategory: React.FC = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
           </button>
-          <button 
+          <button
             onClick={() => scroll('right')}
             className="bg-gray-100 p-3 rounded-full hover:bg-gray-200 text-black transition-colors cursor-pointer"
             aria-label="Scroll right"
@@ -250,27 +250,25 @@ const BrowseByCategory: React.FC = () => {
       </div>
 
       {/* Swipeable Horizontal Grid Layout System Container */}
-      <div 
+      <div
         ref={scrollRef}
         className="flex gap-3 sm:gap-7 overflow-x-auto pb-4 scrollbar-none snap-x scroll-smooth"
       >
         {categoriesData.map((category) => {
           const isActive = category.id === activeId;
-          
+
           return (
-            <div 
-              key={category.id} 
+            <div
+              key={category.id}
               onClick={() => handleCategoryClick(category)}
-              className={`snap-start shrink-0 w-25 h-25 sm:w-42.5 sm:h-36.25 border rounded-sm flex flex-col items-center justify-center gap-2 sm:gap-4 cursor-pointer transition-all duration-200 group select-none ${
-                isActive 
-                  ? 'bg-accent border-accent text-accent-foreground' 
+              className={`snap-start shrink-0 w-25 h-25 sm:w-42.5 sm:h-36.25 border rounded-sm flex flex-col items-center justify-center gap-2 sm:gap-4 cursor-pointer transition-all duration-200 group select-none ${isActive
+                  ? 'bg-accent border-accent text-accent-foreground'
                   : 'bg-white border-gray-200 text-black hover:border-gray-400'
-              }`}
+                }`}
             >
               {/* Icon Container with adaptive stroke thickness context */}
-              <div className={`transition-transform duration-200 group-hover:scale-105 ${
-                isActive ? 'text-accent-foreground' : 'text-black'
-              }`}>
+              <div className={`transition-transform duration-200 group-hover:scale-105 ${isActive ? 'text-accent-foreground' : 'text-black'
+                }`}>
                 {category.icon}
               </div>
 

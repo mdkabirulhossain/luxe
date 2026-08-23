@@ -164,11 +164,10 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <div
       onMouseLeave={handleMouseLeaveSidebar}
-      className={`relative w-full lg:w-64 shrink-0 flex flex-col z-30 ${
-        isDropdown
+      className={`relative w-full lg:w-64 shrink-0 flex flex-col z-30 ${isDropdown
           ? "lg:border-none lg:pt-0 lg:pr-0"
           : "lg:border-r lg:border-gray-200 lg:pt-2 lg:pr-4"
-      }`}
+        }`}
     >
       {/* ── MOBILE & TABLET CATEGORIES ── */}
       <div className="w-full lg:hidden py-4 border-b border-b-gray-100 bg-white sticky top-20 z-20 overflow-visible">
@@ -179,11 +178,10 @@ const Sidebar: React.FC<SidebarProps> = ({
               <button
                 key={idx}
                 onClick={() => handleSelect(cat.name)}
-                className={`text-sm px-4 py-2 rounded-full font-medium transition-colors flex items-center gap-1 cursor-pointer ${
-                  isActive
+                className={`text-sm px-4 py-2 rounded-full font-medium transition-colors flex items-center gap-1 cursor-pointer ${isActive
                     ? "bg-[#204E42] text-white"
                     : "bg-gray-100 hover:bg-gray-200 text-black"
-                }`}
+                  }`}
               >
                 <span>{cat.name}</span>
                 {cat.subOptions && (
@@ -200,11 +198,10 @@ const Sidebar: React.FC<SidebarProps> = ({
           <div className="flex gap-2 overflow-x-auto scrollbar-none px-1 py-2 mt-2 whitespace-nowrap">
             <button
               onClick={() => handleSelect(activeCategory)}
-              className={`text-xs px-3.5 py-1.5 rounded-full font-medium transition-colors cursor-pointer ${
-                activeSubcategory === ""
+              className={`text-xs px-3.5 py-1.5 rounded-full font-medium transition-colors cursor-pointer ${activeSubcategory === ""
                   ? "bg-black text-white"
                   : "bg-gray-100 hover:bg-gray-200 text-black"
-              }`}
+                }`}
             >
               All {activeCategory}
             </button>
@@ -214,11 +211,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                 <button
                   key={sub}
                   onClick={() => handleSelect(activeCategory, sub)}
-                  className={`text-xs px-3.5 py-1.5 rounded-full font-medium transition-colors cursor-pointer ${
-                    isSubActive
+                  className={`text-xs px-3.5 py-1.5 rounded-full font-medium transition-colors cursor-pointer ${isSubActive
                       ? "bg-black text-white"
                       : "bg-gray-100 hover:bg-gray-200 text-black"
-                  }`}
+                    }`}
                 >
                   {sub}
                 </button>
@@ -243,20 +239,18 @@ const Sidebar: React.FC<SidebarProps> = ({
                 className="relative flex flex-col select-none group border-b border-gray-100/70 last:border-0"
               >
                 <div
-                  className={`flex justify-between items-center text-[14px] cursor-pointer py-3.5 pr-2 transition-all font-normal ${
-                    isHovered || isActive
+                  className={`flex justify-between items-center text-[14px] cursor-pointer py-3.5 pr-2 transition-all font-normal ${isHovered || isActive
                       ? "text-[#204E42]"
                       : "text-gray-800 hover:text-[#204E42]"
-                  }`}
+                    }`}
                 >
                   <span>{cat.name}</span>
                   {hasSub && (
                     <svg
-                      className={`w-3.5 h-3.5 transition-colors duration-200 ${
-                        isHovered || isActive
+                      className={`w-3.5 h-3.5 transition-colors duration-200 ${isHovered || isActive
                           ? "text-[#204E42]"
                           : "text-gray-400 group-hover:text-[#204E42]"
-                      }`}
+                        }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -299,18 +293,16 @@ const Sidebar: React.FC<SidebarProps> = ({
                     e.stopPropagation();
                     handleSelect(hoveredCategory, sub.name);
                   }}
-                  className={`flex justify-between items-center text-[14px] cursor-pointer py-3.5 px-3 border-b border-gray-50 last:border-0 transition-all font-normal ${
-                    isSubHovered || isSubActive
+                  className={`flex justify-between items-center text-[14px] cursor-pointer py-3.5 px-3 border-b border-gray-50 last:border-0 transition-all font-normal ${isSubHovered || isSubActive
                       ? "text-[#204E42]"
                       : "text-gray-700 hover:text-[#204E42]"
-                  }`}
+                    }`}
                 >
                   <span>{sub.name}</span>
                   {hasSubSub && (
                     <svg
-                      className={`w-3.5 h-3.5 transition-colors duration-200 ${
-                        isSubHovered ? "text-[#204E42]" : "text-gray-400"
-                      }`}
+                      className={`w-3.5 h-3.5 transition-colors duration-200 ${isSubHovered ? "text-[#204E42]" : "text-gray-400"
+                        }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -342,11 +334,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                       e.stopPropagation();
                       handleSelect(hoveredCategory, subSub);
                     }}
-                    className={`text-[14px] cursor-pointer py-3.5 px-3 border-b border-gray-50 last:border-0 transition-all font-normal ${
-                      isSubSubActive
+                    className={`text-[14px] cursor-pointer py-3.5 px-3 border-b border-gray-50 last:border-0 transition-all font-normal ${isSubSubActive
                         ? "text-[#204E42]"
                         : "text-gray-600 hover:text-[#204E42]"
-                    }`}
+                      }`}
                   >
                     {subSub}
                   </div>

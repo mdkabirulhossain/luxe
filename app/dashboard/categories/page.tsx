@@ -24,12 +24,12 @@ const INITIAL_CATEGORIES: CategoryItem[] = [
 export default function CategoriesPage() {
   const [categories, setCategories] = useState<CategoryItem[]>(INITIAL_CATEGORIES);
   const [searchQuery, setSearchQuery] = useState("");
-  
+
   // Modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"create" | "edit">("create");
   const [editingId, setEditingId] = useState<string | null>(null);
-  
+
   // Form states
   const [catName, setCatName] = useState("");
   const [subcatsText, setSubcatsText] = useState("");
@@ -89,7 +89,7 @@ export default function CategoriesPage() {
         status: catStatus,
       };
       setCategories((prev) => [newCat, ...prev]);
-      
+
       toast.success("Success", {
         description: `Category "${newCat.name}" created successfully!`,
       });
@@ -113,7 +113,7 @@ export default function CategoriesPage() {
   // Delete Category Action
   const handleDeleteCategory = (id: string, name: string) => {
     setCategories((prev) => prev.filter((cat) => cat.id !== id));
-    
+
     toast.error("Deleted", {
       description: `Category "${name}" deleted successfully!`,
     });
@@ -122,14 +122,14 @@ export default function CategoriesPage() {
   return (
     <div className="space-y-6">
       <CategoryHeader onOpenCreateModal={handleOpenCreateModal} />
-      
-      <CategoryMetrics 
+
+      <CategoryMetrics
         totalCategoriesCount={totalCategoriesCount}
         totalSubcategoriesCount={totalSubcategoriesCount}
         activeCount={activeCount}
       />
 
-      <CategorySearch 
+      <CategorySearch
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />

@@ -40,7 +40,7 @@ const HeroBanner: React.FC = () => {
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-500/30 backdrop-blur-md">
               <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
               <span className="text-xs font-medium tracking-[0.18em] uppercase text-emerald-300">
-                New Season 2026 • Exclusive Curation
+                New Season • Exclusive Curation
               </span>
             </div>
 
