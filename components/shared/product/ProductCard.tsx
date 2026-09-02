@@ -5,6 +5,8 @@ import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+import { ColorVariant } from "@/lib/products";
+
 // ─── Shared Product Type ──────────────────────────────────────────────────────
 
 export interface ProductCardData {
@@ -16,11 +18,18 @@ export interface ProductCardData {
   discount?: number;
   isBestSeller?: boolean;
   isHot?: boolean;
+  isNew?: boolean;
+  colors?: string[];
+  colorVariants?: ColorVariant[];
+  rating?: number;
+  reviewsCount?: number;
 }
 
 interface ProductCardProps {
   product: ProductCardData;
   variant?: string;
+  selectedColorIndex?: number;
+  onColorSelect?: (productId: string, colorIndex: number) => void;
 }
 
 // ─── SVG Icon Atoms ───────────────────────────────────────────────────────────
@@ -56,6 +65,14 @@ const CartIcon = () => (
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const router = useRouter();
+  const [currentImage, setCurrentImage] = React.useState(product.image);
+  const [activeColor, setActiveColor] = React.useState<string | null>(
+    product.colorVariants?.[0]?.colorClass || null
+  );
+
+  React.useEffect(() => {
+    setCurrentImage(product.image);
+  }, [product.image]);
 
   // Any click routes to the product details page as requested
   const handleNavigate = () => {
@@ -66,6 +83,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const handleButtonClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     handleNavigate();
+  };
+
+  const handleColorClick = (e: React.MouseEvent, colorClass: string, variantImage?: string) => {
+    e.stopPropagation();
+    setActiveColor(colorClass);
+    if (variantImage) {
+      setCurrentImage(variantImage);
+    }
   };
 
   return (
@@ -128,7 +153,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {/* Main Product Image */}
         <div className="relative w-full h-full max-w-[90%] transition-transform duration-500 group-hover:scale-105">
           <Image
-            src={product.image || "/placeholder.png"}
+            src={currentImage || product.image || "/placeholder.png"}
             alt={product.title}
             fill
             sizes="(max-width: 280px) 100vw, 250px"
@@ -161,15 +186,34 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {product.title}
         </h3>
         
-        <div className="flex items-center gap-2 mt-1">
-          {product.originalPrice !== undefined && (
-            <span className="text-[15px] font-medium text-gray-400 line-through">
-              ৳ {product.originalPrice.toLocaleString()}
+        <div className="flex items-center justify-between mt-1">
+          <div className="flex items-center gap-2">
+            {product.originalPrice !== undefined && (
+              <span className="text-[15px] font-medium text-gray-400 line-through">
+                ৳ {product.originalPrice.toLocaleString()}
+              </span>
+            )}
+            <span className="text-[17px] font-bold text-[#0F172A]">
+              ৳ {product.currentPrice.toLocaleString()}
             </span>
+          </div>
+
+          {/* Color Swatch Dots on Card */}
+          {product.colorVariants && product.colorVariants.length > 0 && (
+            <div className="flex items-center gap-1.5 z-20">
+              {product.colorVariants.map((variant) => (
+                <button
+                  key={variant.name + variant.colorClass}
+                  onClick={(e) => handleColorClick(e, variant.colorClass, variant.image)}
+                  title={variant.name}
+                  className={`w-3.5 h-3.5 rounded-full ${variant.colorClass} border border-gray-300 transition-transform ${
+                    activeColor === variant.colorClass ? "scale-125 ring-1 ring-black" : "hover:scale-110"
+                  }`}
+                  style={variant.hex ? { backgroundColor: variant.hex } : undefined}
+                />
+              ))}
+            </div>
           )}
-          <span className="text-[17px] font-bold text-[#0F172A]">
-            ৳ {product.currentPrice.toLocaleString()}
-          </span>
         </div>
       </div>
 

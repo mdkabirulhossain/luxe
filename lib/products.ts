@@ -1,5 +1,12 @@
 // lib/products.ts
 
+export interface ColorVariant {
+  name: string;
+  colorClass: string;
+  hex?: string;
+  image: string;
+}
+
 export interface DetailedProduct {
   id: string;
   title: string;
@@ -11,6 +18,7 @@ export interface DetailedProduct {
   description: string;
   inStock: boolean;
   colors?: string[];
+  colorVariants?: ColorVariant[];
   sizes?: string[];
 }
 
@@ -31,7 +39,27 @@ export const dummyProducts: DetailedProduct[] = [
     ],
     description: "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
     inStock: true,
-    colors: ["bg-red-500", "bg-black"],
+    colors: ["bg-red-500", "bg-black", "bg-blue-600"],
+    colorVariants: [
+      {
+        name: "Crimson Red",
+        colorClass: "bg-red-500",
+        hex: "#ef4444",
+        image: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=600&q=80",
+      },
+      {
+        name: "Midnight Black",
+        colorClass: "bg-black",
+        hex: "#000000",
+        image: "https://images.unsplash.com/photo-1592155931584-901ac15763e3?auto=format&fit=crop&w=600&q=80",
+      },
+      {
+        name: "Electric Blue",
+        colorClass: "bg-blue-600",
+        hex: "#2563eb",
+        image: "https://images.unsplash.com/photo-1603481588273-2f908a9a7a1b?auto=format&fit=crop&w=600&q=80",
+      },
+    ],
     sizes: ["XS", "S", "M", "L", "XL"],
   },
   {
@@ -49,7 +77,27 @@ export const dummyProducts: DetailedProduct[] = [
     ],
     description: "AK-900 Ultra-responsive keys layout for high productivity and gaming performance. Features fully customizable multi-zone RGB backlighting.",
     inStock: true,
-    colors: ["bg-black", "bg-gray-400"],
+    colors: ["bg-black", "bg-gray-400", "bg-purple-600"],
+    colorVariants: [
+      {
+        name: "Dark Onyx",
+        colorClass: "bg-black",
+        hex: "#18181b",
+        image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80",
+      },
+      {
+        name: "Cyber Platinum",
+        colorClass: "bg-gray-400",
+        hex: "#9ca3af",
+        image: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=600&q=80",
+      },
+      {
+        name: "RGB Purple",
+        colorClass: "bg-purple-600",
+        hex: "#9333ea",
+        image: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=600&q=80",
+      },
+    ],
     sizes: ["Standard"],
   },
   {

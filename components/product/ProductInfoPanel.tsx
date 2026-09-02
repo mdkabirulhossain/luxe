@@ -8,22 +8,37 @@ import { DetailedProduct } from "@/lib/products";
 
 interface ProductInfoPanelProps {
   product: DetailedProduct;
+  selectedColor?: string;
+  onColorChange?: (colorClass: string, variantImage?: string) => void;
 }
 
-export default function ProductInfoPanel({ product }: ProductInfoPanelProps) {
-  const [selectedColor, setSelectedColor] = useState("");
+export default function ProductInfoPanel({ product, selectedColor: externalSelectedColor, onColorChange }: ProductInfoPanelProps) {
+  const [internalSelectedColor, setInternalSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(2);
 
+  const activeColor = externalSelectedColor || internalSelectedColor;
+
   // Synchronize internal state when product changes
   useEffect(() => {
-    setSelectedColor(product.colors?.[0] || "");
+    const initialColor = product.colorVariants?.[0]?.colorClass || product.colors?.[0] || "";
+    setInternalSelectedColor(initialColor);
     setSelectedSize(product.sizes?.[0] || "M");
     setQuantity(2);
   }, [product]);
 
+  const handleColorSelect = (colorClass: string, variantImage?: string) => {
+    setInternalSelectedColor(colorClass);
+    if (onColorChange) {
+      onColorChange(colorClass, variantImage);
+    }
+  };
+
   const rating = product.rating ?? 5;
   const reviewsCount = product.reviewsCount ?? 0;
+
+  // Active color variant metadata
+  const activeVariant = product.colorVariants?.find((v) => v.colorClass === activeColor);
 
   return (
     <div className="w-full flex flex-col">
@@ -63,19 +78,31 @@ export default function ProductInfoPanel({ product }: ProductInfoPanelProps) {
       </p>
 
       {/* Colour Swatch Options */}
-      {product.colors && product.colors.length > 0 && (
+      {((product.colorVariants && product.colorVariants.length > 0) || (product.colors && product.colors.length > 0)) && (
         <div className="flex items-center gap-4 mt-6">
           <span className="text-sm font-medium text-black">Colours:</span>
           <div className="flex items-center gap-2">
-            {product.colors.map((colorClass) => (
-              <button
-                key={colorClass}
-                onClick={() => setSelectedColor(colorClass)}
-                className={`w-5 h-5 rounded-full ${colorClass} ring-offset-2 ring-1 transition-all cursor-pointer ${
-                  selectedColor === colorClass ? "ring-black" : "ring-transparent"
-                }`}
-              />
-            ))}
+            {product.colorVariants && product.colorVariants.length > 0
+              ? product.colorVariants.map((variant) => (
+                  <button
+                    key={variant.name + variant.colorClass}
+                    onClick={() => handleColorSelect(variant.colorClass, variant.image)}
+                    title={variant.name}
+                    className={`w-5 h-5 rounded-full ${variant.colorClass} ring-offset-2 ring-1 transition-all cursor-pointer ${
+                      activeColor === variant.colorClass ? "ring-black" : "ring-transparent"
+                    }`}
+                    style={variant.hex ? { backgroundColor: variant.hex } : undefined}
+                  />
+                ))
+              : product.colors?.map((colorClass) => (
+                  <button
+                    key={colorClass}
+                    onClick={() => handleColorSelect(colorClass)}
+                    className={`w-5 h-5 rounded-full ${colorClass} ring-offset-2 ring-1 transition-all cursor-pointer ${
+                      activeColor === colorClass ? "ring-black" : "ring-transparent"
+                    }`}
+                  />
+                ))}
           </div>
         </div>
       )}

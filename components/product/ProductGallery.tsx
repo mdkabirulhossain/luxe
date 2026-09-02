@@ -5,10 +5,21 @@ import Image from "next/image";
 
 interface ProductGalleryProps {
   images: string[];
+  activeImage?: string;
+  onSelectImage?: (image: string) => void;
 }
 
-export default function ProductGallery({ images }: ProductGalleryProps) {
-  const [activeImage, setActiveImage] = useState(images[0]);
+export default function ProductGallery({ images, activeImage: externalActiveImage, onSelectImage }: ProductGalleryProps) {
+  const [internalActiveImage, setInternalActiveImage] = useState(images[0]);
+
+  const currentActiveImage = externalActiveImage || internalActiveImage;
+
+  const handleImageClick = (img: string) => {
+    setInternalActiveImage(img);
+    if (onSelectImage) {
+      onSelectImage(img);
+    }
+  };
 
   return (
     <div className="w-full flex gap-4">
@@ -17,9 +28,9 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
         {images.map((img, idx) => (
           <button
             key={idx}
-            onClick={() => setActiveImage(img)}
+            onClick={() => handleImageClick(img)}
             className={`w-full aspect-4/3 bg-[#F5F5F5] rounded relative p-2 hover:opacity-90 transition-opacity border ${
-              activeImage === img ? "border-gray-400" : "border-transparent"
+              currentActiveImage === img ? "border-black ring-1 ring-black" : "border-transparent"
             }`}
           >
             {/* Wrapper layout for Next.js Fill Optimization */}
@@ -40,11 +51,11 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
       {/* Main Focus Feature Preview Canvas */}
       <div className="flex-1 bg-[#F5F5F5] rounded p-6 aspect-4/3 relative">
         <Image
-          src={activeImage}
+          src={currentActiveImage}
           alt="Main Focused variant product look"
           fill
           sizes="(max-width: 1024px) 100vw, 60vw"
-          className="object-contain mix-blend-multiply p-6"
+          className="object-contain mix-blend-multiply p-6 transition-all duration-300"
           priority
         />
       </div>

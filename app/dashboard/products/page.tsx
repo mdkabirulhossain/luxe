@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Plus, Download, ChevronDown, Layers, AlertTriangle, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductItem, ProductTable } from "@/app/dashboard/products/_components/ProductTable";
+import { AddProductModal } from "@/app/dashboard/products/_components/AddProductModal";
 
 
 // Mocking high-quality placeholder data mirroring image_55e7ad.jpg
@@ -15,7 +16,11 @@ const MOCK_PRODUCTS: ProductItem[] = [
     category: "Accessories",
     price: 299.00,
     stockStatus: "In Stock",
-    imageSrc: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=150&h=150"
+    imageSrc: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=150&h=150",
+    colors: [
+      { name: "Silver White", colorClass: "bg-gray-200", hex: "#e5e7eb" },
+      { name: "Matte Black", colorClass: "bg-black", hex: "#000000" }
+    ]
   },
   {
     id: "prod-2",
@@ -24,7 +29,11 @@ const MOCK_PRODUCTS: ProductItem[] = [
     category: "Electronics",
     price: 450.00,
     stockStatus: "Low Stock",
-    imageSrc: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=150&h=150"
+    imageSrc: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=150&h=150",
+    colors: [
+      { name: "Midnight Black", colorClass: "bg-black", hex: "#000000" },
+      { name: "Crimson Red", colorClass: "bg-red-500", hex: "#ef4444" }
+    ]
   },
   {
     id: "prod-3",
@@ -33,7 +42,10 @@ const MOCK_PRODUCTS: ProductItem[] = [
     category: "Footwear",
     price: 125.00,
     stockStatus: "Out of Stock",
-    imageSrc: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=150&h=150"
+    imageSrc: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=150&h=150",
+    colors: [
+      { name: "Sport Red", colorClass: "bg-red-600", hex: "#dc2626" }
+    ]
   },
   {
     id: "prod-4",
@@ -42,20 +54,43 @@ const MOCK_PRODUCTS: ProductItem[] = [
     category: "Electronics",
     price: 1299.00,
     stockStatus: "In Stock",
-    imageSrc: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=150&h=150"
+    imageSrc: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=150&h=150",
+    colors: [
+      { name: "Classic Silver", colorClass: "bg-gray-300", hex: "#d1d5db" }
+    ]
   }
 ];
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<ProductItem[]>(MOCK_PRODUCTS);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<ProductItem | null>(null);
+
+  const handleOpenAddModal = () => {
+    setEditingProduct(null);
+    setIsModalOpen(true);
+  };
 
   const handleEditProduct = (id: string) => {
-    console.log("Editing product context profile path:", id);
+    const target = products.find((p) => p.id === id);
+    if (target) {
+      setEditingProduct(target);
+      setIsModalOpen(true);
+    }
   };
 
   const handleDeleteProduct = (id: string) => {
     setProducts((prev) => prev.filter((p) => p.id !== id));
-    console.log("Deleted database product instance entry point row matching ref ID:", id);
+  };
+
+  const handleSaveProduct = (savedProduct: ProductItem) => {
+    setProducts((prev) => {
+      const exists = prev.some((p) => p.id === savedProduct.id);
+      if (exists) {
+        return prev.map((p) => (p.id === savedProduct.id ? savedProduct : p));
+      }
+      return [savedProduct, ...prev];
+    });
   };
 
   return (
@@ -69,7 +104,11 @@ export default function ProductsPage() {
             Manage, track, and update your global store inventory with precision.
           </p>
         </div>
-        <Button size="sm" className="bg-black text-white hover:bg-zinc-800 font-bold text-xs gap-1.5 self-start sm:self-auto">
+        <Button 
+          onClick={handleOpenAddModal}
+          size="sm" 
+          className="bg-black text-white hover:bg-zinc-800 font-bold text-xs gap-1.5 self-start sm:self-auto cursor-pointer"
+        >
           <Plus className="h-3.5 w-3.5" />
           New Product
         </Button>
@@ -100,7 +139,15 @@ export default function ProductsPage() {
         onDelete={handleDeleteProduct} 
       />
 
-      {/* 4. Inventory Analytical Context Bottom Matrix Cards */}
+      {/* 4. Add/Edit Product Modal */}
+      <AddProductModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSave={handleSaveProduct}
+        initialProduct={editingProduct}
+      />
+
+      {/* 5. Inventory Analytical Context Bottom Matrix Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         
         {/* Total Value */}

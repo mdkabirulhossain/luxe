@@ -7,6 +7,13 @@ import { ColumnDef, DataTable } from "@/components/shared/table/DataTable";
 
 export type StockStatus = "In Stock" | "Low Stock" | "Out of Stock";
 
+export interface ProductColorOption {
+  name: string;
+  colorClass: string;
+  hex?: string;
+  image?: string;
+}
+
 export interface ProductItem {
   id: string;
   name: string;
@@ -15,6 +22,9 @@ export interface ProductItem {
   price: number;
   stockStatus: StockStatus;
   imageSrc: string;
+  colors?: ProductColorOption[];
+  sizes?: string[];
+  description?: string;
 }
 
 interface ProductTableProps {
@@ -49,11 +59,25 @@ export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) 
     {
       header: "Product Name",
       render: (product) => (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-0.5">
           <span className="text-slate-900 font-semibold text-sm">{product.name}</span>
-          <span className="text-[11px] text-slate-400 font-medium mt-0.5 tracking-wider uppercase">
-            SKU: {product.sku}
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] text-slate-400 font-medium tracking-wider uppercase">
+              SKU: {product.sku}
+            </span>
+            {product.colors && product.colors.length > 0 && (
+              <div className="flex items-center gap-1">
+                {product.colors.map((c, i) => (
+                  <span
+                    key={i}
+                    title={c.name}
+                    className="w-2.5 h-2.5 rounded-full border border-slate-300 inline-block"
+                    style={{ backgroundColor: c.hex || "#000" }}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       ),
     },
